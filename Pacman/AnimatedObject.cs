@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Pacman
 {
-    public class AnimatedObject:CollisionObject
+    public class AnimatedObject : CollisionObject
     {
 
         private int timeSinceLastFrame = 0;
