@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SharpDX.Direct2D1.Effects;
+using SharpDX.Win32;
 using System.Collections.Generic;
 using System.IO;
 
@@ -9,15 +10,17 @@ namespace Pacman
 {
     public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
 
         public static Tile[,] tileArray;
         public static int tileSize = 50;
 
+        string level;
+
         public Game1()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -31,8 +34,9 @@ namespace Pacman
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            level = new string("Pac-man_map");
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            CreateLevel(level);
             // TODO: use this.Content to load your game content here
         }
         public List<string> ReadFromFile(string fileName)
