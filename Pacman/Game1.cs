@@ -14,7 +14,7 @@ namespace Pacman
         private SpriteBatch spriteBatch;
 
         public static Tile[,] tileArray;
-        public static int tileSize = 50;
+        public static int tileSize = 16;
 
         string level;
 
