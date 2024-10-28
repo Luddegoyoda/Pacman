@@ -13,7 +13,7 @@ namespace Pacman
         private SpriteBatch _spriteBatch;
 
         public static Tile[,] tileArray;
-        public static int tileSize = 50;
+        public static int tileSize = 16;
 
         public Game1()
         {
