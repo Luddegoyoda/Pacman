@@ -39,7 +39,7 @@ namespace Pacman
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(tex, rec, new Rectangle(currentFrame.X * Game1.tileSize, currentFrame.Y * Game1.tileSize, Game1.tileSize, Game1.tileSize), Color.White);
+            spriteBatch.Draw(tex, rec, new Rectangle(currentFrame.X * Game1.spriteSize, currentFrame.Y * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize), Color.White);
         }
     }
 }
