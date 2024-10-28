@@ -1,0 +1,49 @@
+GRUNDKRAV: 
+Banan skall läsas in från fil
+Banan/banorna skall läsas in från en fil/filer som talar om var väggar, spöken mm är placerade och utforma någon form av labyrint.
+Pacman äter mat och man vinner om maten är uppäten.
+Minst ett spöke.
+PacMan och spökena är animerade
+PacMan och spökena är animerade med hjälp av ”spriteanimation”, d.v.s. att det finns ett spritesheet med
+tex PacMan där han öppnar och stänger munnen.
+Pacman förlorar liv vid kollision med spökena och man förlorar om liven tar slut.
+Koden skall implementera arv på ett rimligt vis.
+Koden ska vara skriven på ett snyggt sätt och uppdelat i klasser och metoder samt använda Handler/Manager för att strukturera koden.
+Lösningen ska vara ”tile-baserad” dvs. tilebaserad förflyttning.
+
+
+
+1 Poäng:
+Poängbonusobjekt
+Spelet går att starta om
+High-Score lista. Listan sparas och läsas in från fil. (2 poäng organiserad, 1 oordnad)
+Grafisk HUD
+
+2 Poäng
+Gå ut på ena sidan och kommer in från den andra
+Flera nivåer 
+	(2 poäng under runtime progress behålla poäng mellan banorna och ny bana när förra avklarad.
+	1 poäng under runtime Level select) 
+Power-ups (äta spöken, förstöra väggar m.m.)
+
+EXTRA: Level editor
+4 poäng
+avancerad grafisk editor, automatisk tileval
+3 poäng
+grafisk editor
+2 poäng
+textfil
+öppna upp textfilen från spelet (runtime) och editerar filen
+
+EXTRA: Artificiell intelligens
+1: AI väljer väg (går i en riktning tills spöket träffar en vägg och därefter tar en ny riktning
+tills den träffar nästa) (1p)
+2: Två stycken aktiva AI (ex en som tar en random riktning efter varje steg och en annan som använder beteendet beskrivet ovan) (2p)
+3: AI som försöker ta sig till Pacman samt de två andra beteenden ovan, tillåtet att den kan fastna i en återvändsgränd. (3p)
+4: Alla beteenden ovan samt att spöken reagerar och försöker fly från Pacman om hen har
+tagit en power-up som tillåter spöken att ätas (4p)
+Kommentar:
+- om någon ser till att den inte kan fastna utan alltid når fram till Pacman så ge ett extra poäng.
+
+KRAV FÖR HÖGRE BETYG: klassisk Pacmanrörelse
+Till skillnad från den klassiska versionen av PacMan så är det tillräckligt att PacMan endast rör sig en tile i taget per knapptryck. Dock så MÅSTE man ändra PacMans rörelsebeteende till att vara som i den klassiska versionen (att PacMan fortsätter röra sig åt samma håll tills man klickar på en annan tangent) för att uppnå högre betyg.
