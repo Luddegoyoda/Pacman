@@ -2,8 +2,10 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SharpDX.Direct2D1.Effects;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Pacman
 {
@@ -15,13 +17,18 @@ namespace Pacman
         private Point currentFrame = new Point(0, 0);
 
 
-        public AnimatedObject(Vector2 pos, Texture2D tex, Rectangle rec):base(pos,tex,rec)
+        public AnimatedObject(Vector2 pos, Texture2D tex, Rectangle hitbox):base(pos,tex,hitbox)
         {
 
 
         }
 
         public virtual void Update(GameTime gameTime)
+        {
+            
+        }
+
+        public virtual void Animate(GameTime gameTime)
         {
             timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
 
@@ -39,7 +46,7 @@ namespace Pacman
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(tex, rec, new Rectangle(currentFrame.X * Game1.spriteSize, currentFrame.Y * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize), Color.White);
+            spriteBatch.Draw(tex, hitbox, new Rectangle(currentFrame.X * Game1.spriteSize, currentFrame.Y * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize), Color.White);
         }
     }
 }

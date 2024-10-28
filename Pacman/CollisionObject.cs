@@ -9,13 +9,13 @@ namespace Pacman
 {
     public class CollisionObject : GameObject
     {
-        protected Rectangle rec;
+        protected Rectangle hitbox;
         
 
 
-        public CollisionObject(Vector2 pos, Texture2D tex, Rectangle rec) : base(pos, tex)
+        public CollisionObject(Vector2 pos, Texture2D tex, Rectangle hitbox) : base(pos, tex)
         { 
-            this.rec = rec;
+            this.hitbox = hitbox;
 
 
         }
@@ -23,7 +23,7 @@ namespace Pacman
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(tex, rec, Color.White);
+            spriteBatch.Draw(tex, hitbox, Color.White);
         }
     }
 }
