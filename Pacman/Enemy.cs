@@ -14,7 +14,7 @@ namespace Pacman
         {
             this.pos = pos;
             this.tex = tex;
-            this.rec = rec;
+            this.hitbox = rec;
         }
 
         public override void Update(GameTime gameTime)

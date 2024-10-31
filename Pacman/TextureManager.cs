@@ -9,7 +9,6 @@ namespace Pacman
 {
     public class TextureManager
     {
-
         public static Texture2D spriteSheet;
         public static Texture2D Tileset;
         public static void LoadTextures(ContentManager content)
@@ -18,5 +17,5 @@ namespace Pacman
             Tileset = content.Load<Texture2D>("Tileset"); 
         
         }
-        }
+    }
 }
