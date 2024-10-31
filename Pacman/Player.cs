@@ -20,6 +20,7 @@ namespace Pacman
             this.pos = pos;
             this.tex = tex;
             this.hitbox = hitbox;
+            currentAnimation = AnimationManager.playerEatAnimation[0];
         }
 
         public override void Animate(GameTime gameTime)
@@ -42,12 +43,14 @@ namespace Pacman
 
         public override void Update(GameTime gameTime)
         {
-            
+            Animate(gameTime);
+            hitbox.X = (int)pos.X;
+            hitbox.Y = (int)pos.Y;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(tex, hitbox, currentAnimation, Color.White);
+            spriteBatch.Draw(tex, hitbox, currentAnimation, Color.White); //TODO: Player currently doesn't know its own texture even though it's set when created in Game1 load function
         }
 
         //public static bool GetTileAtPosition(Vector2 pos)

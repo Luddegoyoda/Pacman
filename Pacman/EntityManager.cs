@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,9 @@ namespace Pacman
         }
 
 
-        public void Draw(GameTime gameTime)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            player.Update(gameTime);
+            player.Draw(spriteBatch);
         }
     }
 

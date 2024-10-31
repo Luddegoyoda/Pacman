@@ -12,6 +12,7 @@ namespace Pacman
         private SpriteBatch spriteBatch;
 
         GamemodeManager gamemodeManager;
+        EntityManager entityManager;
         public enum GAMESTATE {MENU, PLAYING, LOST, WON };
         public static GAMESTATE gameState;
 
@@ -32,9 +33,12 @@ namespace Pacman
             // TODO: Add your initialization logic here
 
             gamemodeManager = new GamemodeManager();
+            entityManager = new EntityManager();
             graphics.PreferredBackBufferHeight = 1200;
             graphics.PreferredBackBufferWidth = 1200;
             graphics.ApplyChanges();
+
+            entityManager.player = new Player(new Vector2(0,0), TextureManager.spriteSheet, new Rectangle(0,0,spriteSize,spriteSize));
 
             base.Initialize();
         }
@@ -43,6 +47,9 @@ namespace Pacman
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadTextures(Content);
+
+
+            
             // TODO: use this.Content to load your game content here
         }
         
@@ -58,7 +65,7 @@ namespace Pacman
 
             gamemodeManager.Update(gameTime);
 
-
+            entityManager.Update(gameTime);
 
 
             base.Update(gameTime);
@@ -72,6 +79,7 @@ namespace Pacman
 
             spriteBatch.Begin();
             gamemodeManager.Draw(spriteBatch);
+            entityManager.Draw(spriteBatch);
             spriteBatch.End();
 
 
