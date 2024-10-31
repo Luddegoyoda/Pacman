@@ -50,6 +50,10 @@ namespace Pacman
             spriteBatch.Draw(tex, hitbox, currentAnimation, Color.White);
         }
 
-       
+        //public static bool GetTileAtPosition(Vector2 pos)
+        //{
+        //    return tileArray[(int)pos.X / tileSize, (int)pos.Y / tileSize].NotWalkable;
+        //}
+
     }
 }

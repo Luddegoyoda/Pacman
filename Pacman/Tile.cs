@@ -13,14 +13,20 @@ namespace Pacman
     {
        
         public bool notWalkable;
+        Rectangle sourceRect;
 
-        public Tile(Vector2 pos, Texture2D tex, bool notWalkable) : base (pos,tex)
+        public Tile(Vector2 pos, Texture2D tex, bool notWalkable, Rectangle sourceRec) : base (pos,tex)
         {
             this.pos = pos;
             this.tex = tex;
             this.notWalkable = notWalkable;
+            this.sourceRect = sourceRec;
         }
 
-       
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(TextureManager.Tileset, new Rectangle((int)pos.X, (int)pos.Y, Game1.tileSize, Game1.tileSize), sourceRect, Color.White);
+        }
     }
 }
