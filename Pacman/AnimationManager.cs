@@ -12,8 +12,8 @@ namespace Pacman
     {
         public static Rectangle[] playerEatAnimation =
         {
-            new Rectangle(1 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
-            new Rectangle(2 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
+            new Rectangle(1 * Game1.spriteSize, 0*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
+            new Rectangle(2 * Game1.spriteSize, 0*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
         };
 
         public static Rectangle UpWallRec = new Rectangle(1 * Game1.tileSize, 3 * Game1.tileSize, Game1.tileSize, Game1.tileSize);

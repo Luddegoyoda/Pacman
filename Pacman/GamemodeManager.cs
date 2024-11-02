@@ -139,6 +139,10 @@ namespace Pacman
             }
         }
 
+        public static bool GetTileAtPosition(Vector2 pos)
+        {
+            return tileArray[(int)pos.X / tileSize, (int)pos.Y / tileSize].notWalkable;
+        }
 
         public void Draw(SpriteBatch spriteBatch)
         {
