@@ -32,7 +32,7 @@ namespace Pacman
         {
             foreach(Vector2 foodSpawn in foodLocations)
             {
-                foodList.Add(new Food(foodSpawn,TextureManager.spriteSheet,new Rectangle((int)foodSpawn.X, (int)foodSpawn.Y, Game1.spriteSize,Game1.spriteSize)));
+                foodList.Add(new Food(foodSpawn,TextureManager.spriteSheet,new Rectangle((int)foodSpawn.X + Game1.spriteSize / 2, (int)foodSpawn.Y + Game1.spriteSize / 2, Game1.spriteSize,Game1.spriteSize)));
             }
             foodSpawned = true;
         }
