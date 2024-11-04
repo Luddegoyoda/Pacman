@@ -13,8 +13,8 @@ namespace Pacman
         //player animations
         public static Rectangle[] playerEatAnimation =
         {
-            new Rectangle(1 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
-            new Rectangle(2 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
+            new Rectangle(1 * Game1.spriteSize, 0*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
+            new Rectangle(2 * Game1.spriteSize, 0*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
         };
         public static Rectangle UpWallRec = new Rectangle(1 * Game1.tileSize, 3 * Game1.tileSize, Game1.tileSize, Game1.tileSize);
         public static Rectangle DownWallTex = new Rectangle(3 * Game1.tileSize, 1 * Game1.tileSize, Game1.tileSize, Game1.tileSize);
@@ -24,6 +24,8 @@ namespace Pacman
         public static Rectangle NEwallTex = new Rectangle(0 * Game1.tileSize, 3 * Game1.tileSize, Game1.tileSize, Game1.tileSize);
         public static Rectangle SWwallTex = new Rectangle(0 * Game1.tileSize, 3 * Game1.tileSize, Game1.tileSize, Game1.tileSize);
         public static Rectangle SEwallTex = new Rectangle(2 * Game1.tileSize, 1 * Game1.tileSize, Game1.tileSize, Game1.tileSize);
+        public static Rectangle foodTex = new Rectangle(3 * Game1.spriteSize, 0 * Game1.spriteSize, Game1.spriteSize / 2, Game1.spriteSize / 2);
+
         //ghost animations
         //red ghost
         public static Rectangle[] redGhostLeft =

@@ -5,14 +5,27 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using SharpDX.Direct3D9;
 
 namespace Pacman
 {
     public class Player : AnimatedObject
     {
         int timeSinceLastFrame = 0;
-        int timeToAnimate = 100;
+        int timeToAnimate = 150;
         int animationState = 1;
+        public int health = 3;
+
+        float speed = 50f;
+
+        Vector2 destination;
+        Vector2 direction;
+
+        Vector2 origin;
+
+        bool isAlive = false;
+       
         Rectangle currentAnimation;
 
         public Player(Vector2 pos, Texture2D tex, Rectangle hitbox) : base(pos, tex, hitbox) 
@@ -21,6 +34,8 @@ namespace Pacman
             this.tex = tex;
             this.hitbox = hitbox;
             currentAnimation = AnimationManager.playerEatAnimation[0];
+            isAlive = true;
+            origin = new Vector2(Game1.spriteSize / 2f, Game1.spriteSize / 2f);;
         }
 
         public override void Animate(GameTime gameTime)
@@ -30,33 +45,90 @@ namespace Pacman
             if (timeSinceLastFrame > timeToAnimate)
             {
                 timeSinceLastFrame -= timeToAnimate;
-                animationState++;
+                
 
                 currentAnimation = AnimationManager.playerEatAnimation[animationState];
 
-                if (animationState >= 3)
+                animationState++;
+
+                if (animationState >= 2)
                 {
-                    animationState = 1;
+                    animationState = 0;
                 }
             }
         }
 
+        private void PlayerMoving(GameTime gameTime)
+        {
+            if (!isAlive)
+                return;
+
+            if (GamemodeManager.GetTileAtPosition(pos + direction * Game1.tileSize))
+            {
+                pos += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            {
+                ChangeDirection(new Vector2(-1, 0));
+                   
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            {
+                ChangeDirection(new Vector2(1, 0));
+                
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                ChangeDirection(new Vector2(0, -1));
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.Down))
+            {
+                ChangeDirection(new Vector2(0, 1));
+            }
+        }
+
+        public void ChangeDirection(Vector2 dir)
+        {
+            direction = dir;
+            Vector2 newDestination = pos + direction * Game1.tileSize;
+            if (GamemodeManager.GetTileAtPosition(newDestination))
+            {
+                destination = newDestination;
+            }
+        }
+
+
         public override void Update(GameTime gameTime)
         {
             Animate(gameTime);
+            PlayerMoving(gameTime);
             hitbox.X = (int)pos.X;
             hitbox.Y = (int)pos.Y;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(tex, hitbox, currentAnimation, Color.White); //TODO: Player currently doesn't know its own texture even though it's set when created in Game1 load function
+            if (direction.X >= 1)
+            {
+                spriteBatch.Draw(tex, hitbox, currentAnimation, Color.White, 0f, origin, SpriteEffects.None, 0);
+            }
+            if (direction.X <= -1)
+            {
+                spriteBatch.Draw(tex, hitbox, currentAnimation, Color.White, 0f, origin, SpriteEffects.FlipHorizontally, 0);
+            }
+            if (direction.Y >= 1)
+            {
+                spriteBatch.Draw(tex, hitbox, currentAnimation, Color.White, 4.7f, origin, SpriteEffects.FlipHorizontally, 0);
+            }
+            if (direction.Y <= -1)
+            {
+                spriteBatch.Draw(tex, hitbox, currentAnimation, Color.White, 4.7f, origin, SpriteEffects.None, 0);
+            }
+            
         }
 
-        //public static bool GetTileAtPosition(Vector2 pos)
-        //{
-        //    return tileArray[(int)pos.X / tileSize, (int)pos.Y / tileSize].NotWalkable;
-        //}
+        
 
     }
 }

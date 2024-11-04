@@ -19,8 +19,6 @@ namespace Pacman
         public static int spriteSize = 16;
         public static int tileSize = 32;
 
-        string level;
-
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -34,11 +32,11 @@ namespace Pacman
 
             gamemodeManager = new GamemodeManager();
             entityManager = new EntityManager();
-            graphics.PreferredBackBufferHeight = 1200;
-            graphics.PreferredBackBufferWidth = 1200;
+            graphics.PreferredBackBufferHeight = 1000;
+            graphics.PreferredBackBufferWidth = 1000;
             graphics.ApplyChanges();
 
-            entityManager.player = new Player(new Vector2(0,0), TextureManager.spriteSheet, new Rectangle(0,0,spriteSize,spriteSize));
+            
 
             base.Initialize();
         }
@@ -48,8 +46,8 @@ namespace Pacman
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadTextures(Content);
 
+            entityManager.player = new Player(new Vector2(400, 400), TextureManager.spriteSheet, new Rectangle(0, 0, spriteSize, spriteSize));
 
-            
             // TODO: use this.Content to load your game content here
         }
         
