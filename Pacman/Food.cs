@@ -21,7 +21,11 @@ namespace Pacman
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(tex,hitbox,AnimationManager.foodTex, Color.White);
+            if (isAlive)
+            {
+                spriteBatch.Draw(tex, hitbox, AnimationManager.foodTex, Color.White);
+            }
+            
         }
     }
 }

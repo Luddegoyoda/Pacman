@@ -29,10 +29,11 @@ namespace Pacman
                     {
                         CreateLevel(fileName);
                         mapCreated = true;
+                        Game1.gameState = GAMESTATE.PLAYING;
                     }
                     break;
                 case GAMESTATE.PLAYING:
-
+                    
                     break;
                 case GAMESTATE.LOST:
 
