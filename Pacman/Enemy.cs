@@ -16,7 +16,7 @@ namespace Pacman
         bool isAlive;
         bool enRouteToDestitation;
         bool pathFound;
-        float speed = 45f;
+        float speed = 48f;
 
         int wayPointReachedCounter = 0;
         Vector2 direction;
@@ -31,7 +31,7 @@ namespace Pacman
 
         int smallestIndex = 0; //temp
 
-        public Enemy(Vector2 pos, Texture2D tex, Rectangle rec) : base(pos, tex, rec)
+        public Enemy(Vector2 pos, Texture2D tex, Rectangle rec, ENEMYTYPE ENEMYTYPE) : base(pos, tex, rec)
         {
             this.pos = pos;
             this.tex = tex;
@@ -40,7 +40,7 @@ namespace Pacman
             isAlive = true;
             enRouteToDestitation = false;
             pathFound = false;
-            enemyType= ENEMYTYPE.RED;
+            this.enemyType = ENEMYTYPE;
             targetPosition = Vector2.Zero;
         }
 

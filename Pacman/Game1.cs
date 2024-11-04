@@ -45,7 +45,7 @@ namespace Pacman
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadTextures(Content);
-
+            SoundManager.LoadAllSounds(Content);
             entityManager.player = new Player(new Vector2(400, 400), TextureManager.spriteSheet, new Rectangle(0, 0, spriteSize, spriteSize));
 
             // TODO: use this.Content to load your game content here

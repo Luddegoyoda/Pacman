@@ -26,7 +26,7 @@ namespace Pacman
 
         Vector2 origin;
 
-        bool isAlive = false;
+        public bool isAlive = false;
        
         Rectangle currentAnimation;
 
@@ -66,7 +66,7 @@ namespace Pacman
             if (!isAlive)
                 return;
 
-            if (GamemodeManager.GetTileAtPosition(pos + direction * Game1.tileSize))
+            if (GamemodeManager.GetTileAtPosition(pos + direction * Game1.tileSize / 2))
             {
                 pos += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
@@ -95,7 +95,7 @@ namespace Pacman
         public void ChangeDirection(Vector2 dir)
         {
             direction = dir;
-            Vector2 newDestination = pos + direction * Game1.tileSize / 4;
+            Vector2 newDestination = pos + direction * Game1.tileSize / 2;
             if (GamemodeManager.GetTileAtPosition(newDestination))
             {
                 destination = newDestination; //This might be the thing causing weird movement collision
