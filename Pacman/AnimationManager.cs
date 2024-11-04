@@ -28,5 +28,29 @@ namespace Pacman
         public static Rectangle foodTex = new Rectangle(3 * Game1.spriteSize, 0 * Game1.spriteSize , Game1.spriteSize / 2, Game1.spriteSize / 2);
 
 
+        public static Rectangle[] redGhostTex =
+        {
+            new Rectangle(0 * Game1.spriteSize, 1*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
+            new Rectangle(1 * Game1.spriteSize, 1*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
+        };
+        public static Rectangle[] pinkGhostTex =
+        {
+            new Rectangle(0 * Game1.spriteSize, 2*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
+            new Rectangle(1 * Game1.spriteSize, 2*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
+        };
+        public static Rectangle[] cyanGhostTex =
+        {
+            new Rectangle(0 * Game1.spriteSize, 3*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
+            new Rectangle(1 * Game1.spriteSize, 3*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
+        };
+        public static Rectangle[] orangeGhostTex =
+        {
+            new Rectangle(0 * Game1.spriteSize, 4*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
+            new Rectangle(1 * Game1.spriteSize, 4*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
+        };
+
+        
+
+
     }
 }

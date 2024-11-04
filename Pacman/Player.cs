@@ -76,7 +76,6 @@ namespace Pacman
             else if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
                 ChangeDirection(new Vector2(1, 0));
-                
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
@@ -86,6 +85,8 @@ namespace Pacman
             {
                 ChangeDirection(new Vector2(0, 1));
             }
+
+            
         }
 
         public void ChangeDirection(Vector2 dir)
@@ -94,7 +95,7 @@ namespace Pacman
             Vector2 newDestination = pos + direction * Game1.tileSize;
             if (GamemodeManager.GetTileAtPosition(newDestination))
             {
-                destination = newDestination;
+                destination = newDestination; //This might be the thing causing weird movement collision
             }
         }
 
@@ -124,6 +125,10 @@ namespace Pacman
             if (direction.Y <= -1)
             {
                 spriteBatch.Draw(tex, hitbox, currentAnimation, Color.White, 4.7f, origin, SpriteEffects.None, 0);
+            }
+            if (direction.Y == 0 && direction.X == 0)
+            {
+                spriteBatch.Draw(tex, hitbox, currentAnimation, Color.White, 0f, origin, SpriteEffects.None, 0);
             }
             
         }

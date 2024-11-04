@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Direct2D1.Effects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace Pacman
 
         bool foodSpawned = false;
 
-        List<Enemy> enemyList;
+        public List<Enemy> enemyList;
         public static List<Vector2> foodLocations;
 
         public List<Food> foodList;
@@ -36,12 +37,25 @@ namespace Pacman
             foodSpawned = true;
         }
 
+        void SpawnEnemies()
+        {
+            enemyList.Add(new Enemy(new Vector2(400, 450), TextureManager.spriteSheet, new Rectangle(400, 450, Game1.spriteSize, Game1.spriteSize)));
+        }
+
         public void Update(GameTime gameTime)
         {
             PlayerUpdates(gameTime);
             if (!foodSpawned)
             {
                 SpawnFood();
+            }
+            if (enemyList.Count < 1)
+            {
+                SpawnEnemies();
+            }
+            foreach(Enemy enemy in enemyList)
+            {
+                enemy.Update(gameTime);
             }
         }
 
@@ -52,6 +66,10 @@ namespace Pacman
             foreach(Food food in foodList)
             {
                 food.Draw(spriteBatch);
+            }
+            foreach(Enemy enemy in enemyList)
+            {
+                enemy.Draw(spriteBatch);
             }
         }
 
