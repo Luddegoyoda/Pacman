@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Pacman.Game1;
 
 namespace Pacman
 {
@@ -13,22 +12,47 @@ namespace Pacman
     {
         public Player player;
 
-        List<Enemy> enemyArray;
+        bool foodSpawned = false;
+
+        List<Enemy> enemyList;
+        public static List<Vector2> foodLocations;
+
+        public List<Food> foodList;
 
         public EntityManager()
         {
-            enemyArray = new List<Enemy>();
+            enemyList = new List<Enemy>();
+            foodList = new List<Food>();
+            foodLocations = new List<Vector2>();
+            
+        }
+
+        public void SpawnFood()
+        {
+            foreach(Vector2 foodSpawn in foodLocations)
+            {
+                foodList.Add(new Food(foodSpawn,TextureManager.spriteSheet,new Rectangle((int)foodSpawn.X, (int)foodSpawn.Y, Game1.spriteSize,Game1.spriteSize)));
+            }
+            foodSpawned = true;
         }
 
         public void Update(GameTime gameTime)
         {
             PlayerUpdates(gameTime);
+            if (!foodSpawned)
+            {
+                SpawnFood();
+            }
         }
 
 
         public void Draw(SpriteBatch spriteBatch)
         {
             player.Draw(spriteBatch);
+            foreach(Food food in foodList)
+            {
+                food.Draw(spriteBatch);
+            }
         }
 
 
@@ -37,19 +61,19 @@ namespace Pacman
         {
             player.Update(gameTime);
 
-            //if (player.HasCollided(goal))
-            //{
-            //    Game1.gameOver = true;
-            //    Game1.game_state = GAME_STATE.END;
-            //    ResetEntites();
-            //}
+            foreach (Food food in foodList)
+            {
+                if (player.hitbox.Intersects(food.hitbox))
+                {
+                    food.isAlive= false;
+                }
+            }
+            
 
-            //if (player.lives <= 0)
-            //{
-            //    Game1.gameOver = false;
-            //    Game1.game_state = GAME_STATE.END;
-            //    ResetEntites();
-            //}
+            if (player.health <= 0)
+            {
+                
+            }
 
         }
     }

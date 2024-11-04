@@ -14,6 +14,7 @@ namespace Pacman
        
         public bool notWalkable;
         Rectangle sourceRect;
+        public new Vector2 pos;
 
         public Tile(Vector2 pos, Texture2D tex, bool notWalkable, Rectangle sourceRec) : base (pos,tex)
         {

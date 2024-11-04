@@ -72,35 +72,35 @@ namespace Pacman
                 {
                     if (result[i][j] == 'N')//North sprite
                     {
-                        tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.Tileset, true, AnimationManager.UpWallRec);
+                        tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.Tileset, false, AnimationManager.UpWallRec);
                     }
                     if (result[i][j] == 'B')//Bottom sprite
                     {
-                        tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.Tileset, true, AnimationManager.DownWallTex);
+                        tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.Tileset, false, AnimationManager.DownWallTex);
                     }
                     if (result[i][j] == 'W')//West sprite
                     {
-                        tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.Tileset, true, AnimationManager.WestWallTex);
+                        tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.Tileset, false, AnimationManager.WestWallTex);
                     }
                     if (result[i][j] == 'E')//East sprite
                     {
-                        tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.Tileset, true, AnimationManager.EastWallTex);
+                        tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.Tileset, false, AnimationManager.EastWallTex);
                     }
                     if (result[i][j] == 'Q')//NorthWest sprite
                     {
-                        tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.Tileset, true, AnimationManager.NWwallTex);
+                        tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.Tileset, false, AnimationManager.NWwallTex);
                     }
                     if (result[i][j] == 'H')//NorthEast sprite
                     {
-                        tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.Tileset, true, AnimationManager.NEwallTex);
+                        tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.Tileset, false, AnimationManager.NEwallTex);
                     }
                     if (result[i][j] == 'Z')//SouthWest sprite
                     {
-                        tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.Tileset, true, AnimationManager.SWwallTex);
+                        tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.Tileset, false, AnimationManager.SWwallTex);
                     }
                     if (result[i][j] == 'X')//SouthEast sprite
                     {
-                        tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.Tileset, true, AnimationManager.SEwallTex);
+                        tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.Tileset, false, AnimationManager.SEwallTex);
                     }
                     if (result[i][j] == 'V')//void
                     {
@@ -109,6 +109,7 @@ namespace Pacman
                     if (result[i][j] == 'F')//Food (pellets) sprite
                     {
                         tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.blackTex, true, new Rectangle(j * Game1.tileSize, i * Game1.tileSize, Game1.tileSize, Game1.tileSize));
+                        EntityManager.foodLocations.Add(tileArray[j, i].pos);
                     }
                     if (result[i][j] == 'M')//Mat sprite
                     {
