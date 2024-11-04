@@ -24,22 +24,6 @@ namespace Pacman
         public static Rectangle NEwallTex = new Rectangle(0 * Game1.tileSize, 3 * Game1.tileSize, Game1.tileSize, Game1.tileSize);
         public static Rectangle SWwallTex = new Rectangle(0 * Game1.tileSize, 3 * Game1.tileSize, Game1.tileSize, Game1.tileSize);
         public static Rectangle SEwallTex = new Rectangle(2 * Game1.tileSize, 1 * Game1.tileSize, Game1.tileSize, Game1.tileSize);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //ghost animations
         //red ghost
         public static Rectangle[] redGhostLeft =
