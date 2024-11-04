@@ -72,7 +72,7 @@ namespace Pacman
             {
                 for (int j = 0; j < result[0].Length; j++)
                 {
-                    if (result[i][j] == 'N')//North sprite
+                    if (result[i][j] == 'R')//North sprite
                     {
                         tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.Tileset, false, AnimationManager.UpWallRec);
                     }

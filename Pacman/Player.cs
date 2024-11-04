@@ -36,6 +36,7 @@ namespace Pacman
             currentAnimation = AnimationManager.playerEatAnimation[0];
             isAlive = true;
             origin = new Vector2(Game1.spriteSize / 2f, Game1.spriteSize / 2f);
+            hitbox = new Rectangle((int)pos.X, (int)pos.Y, Game1.tileSize, Game1.tileSize);
         }
 
         public override void Animate(GameTime gameTime)
