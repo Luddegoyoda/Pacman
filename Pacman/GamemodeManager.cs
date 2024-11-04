@@ -16,7 +16,7 @@ namespace Pacman
 
         public static Tile[,] tileArray;
 
-        
+        string fileName = "map.txt";
         bool mapCreated;
 
         public void Update(GameTime gameTime)
@@ -27,7 +27,7 @@ namespace Pacman
                 case GAMESTATE.MENU:
                     if (!mapCreated)
                     {
-                        string fileName = "map.txt";
+                        
                         CreateLevel(fileName);
                         mapCreated = true;
                         Game1.gameState = GAMESTATE.PLAYING;
