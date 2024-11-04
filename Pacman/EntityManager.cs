@@ -39,7 +39,7 @@ namespace Pacman
 
         void SpawnEnemies()
         {
-            enemyList.Add(new Enemy(new Vector2(400, 450), TextureManager.spriteSheet, new Rectangle(400, 450, Game1.spriteSize, Game1.spriteSize)));
+            enemyList.Add(new Enemy(new Vector2(480, 480), TextureManager.spriteSheet, new Rectangle(480, 480, Game1.spriteSize, Game1.spriteSize)));
         }
 
         public void Update(GameTime gameTime)
@@ -56,6 +56,7 @@ namespace Pacman
             foreach(Enemy enemy in enemyList)
             {
                 enemy.Update(gameTime);
+                enemy.CalculatePath(player.pos, gameTime);
             }
         }
 

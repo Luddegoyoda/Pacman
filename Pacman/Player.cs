@@ -19,6 +19,8 @@ namespace Pacman
 
         float speed = 50f;
 
+        public new Vector2 pos;
+
         Vector2 destination;
         Vector2 direction;
 
@@ -93,7 +95,7 @@ namespace Pacman
         public void ChangeDirection(Vector2 dir)
         {
             direction = dir;
-            Vector2 newDestination = pos + direction * Game1.tileSize;
+            Vector2 newDestination = pos + direction * Game1.tileSize / 4;
             if (GamemodeManager.GetTileAtPosition(newDestination))
             {
                 destination = newDestination; //This might be the thing causing weird movement collision
