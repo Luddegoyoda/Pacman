@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Direct2D1.Effects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace Pacman
 
         bool foodSpawned = false;
 
-        List<Enemy> enemyList;
+        public List<Enemy> enemyList;
         public static List<Vector2> foodLocations;
 
         public List<Food> foodList;
@@ -36,12 +37,29 @@ namespace Pacman
             foodSpawned = true;
         }
 
+        void SpawnEnemies()
+        {
+            enemyList.Add(new Enemy(new Vector2(480, 480), TextureManager.spriteSheet, new Rectangle(480, 480, Game1.spriteSize, Game1.spriteSize), Enemy.ENEMYTYPE.RED));
+            enemyList.Add(new Enemy(new Vector2(500, 480), TextureManager.spriteSheet, new Rectangle(500, 480, Game1.spriteSize, Game1.spriteSize), Enemy.ENEMYTYPE.PINK));
+            enemyList.Add(new Enemy(new Vector2(500, 500), TextureManager.spriteSheet, new Rectangle(500, 500, Game1.spriteSize, Game1.spriteSize), Enemy.ENEMYTYPE.CYAN));
+            enemyList.Add(new Enemy(new Vector2(480, 500), TextureManager.spriteSheet, new Rectangle(480, 500, Game1.spriteSize, Game1.spriteSize), Enemy.ENEMYTYPE.ORANGE));
+        }
+
         public void Update(GameTime gameTime)
         {
             PlayerUpdates(gameTime);
             if (!foodSpawned)
             {
                 SpawnFood();
+            }
+            if (enemyList.Count < 1)
+            {
+                SpawnEnemies();
+            }
+            foreach(Enemy enemy in enemyList)
+            {
+                enemy.Update(gameTime);
+                enemy.CalculatePath(player.pos, gameTime);
             }
         }
 
@@ -52,6 +70,10 @@ namespace Pacman
             foreach(Food food in foodList)
             {
                 food.Draw(spriteBatch);
+            }
+            foreach(Enemy enemy in enemyList)
+            {
+                enemy.Draw(spriteBatch);
             }
         }
 
@@ -65,14 +87,26 @@ namespace Pacman
             {
                 if (player.hitbox.Intersects(food.hitbox))
                 {
+                    if (food.isAlive)
+                    {
+                        SoundManager.PlayEffect(SoundManager.allSoundEffects[0]);
+                    }
                     food.isAlive= false;
+                    
                 }
             }
-            
+            foreach (Enemy enemy in enemyList)
+            {
+                if (player.hitbox.Intersects(enemy.hitbox))
+                {
+                    player.health--;
+                }
+            }
+
 
             if (player.health <= 0)
             {
-                
+                player.isAlive = false;
             }
 
         }

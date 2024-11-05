@@ -25,6 +25,12 @@
 /processorParam:TextureFormat=Color
 /build:blackTex.jpg
 
+#begin Pacman Chomp.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Pacman Chomp.mp3
+
 #begin SpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor

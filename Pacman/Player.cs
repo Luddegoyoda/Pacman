@@ -19,12 +19,14 @@ namespace Pacman
 
         float speed = 50f;
 
+        public new Vector2 pos;
+
         Vector2 destination;
         Vector2 direction;
 
         Vector2 origin;
 
-        bool isAlive = false;
+        public bool isAlive = false;
        
         Rectangle currentAnimation;
 
@@ -64,7 +66,7 @@ namespace Pacman
             if (!isAlive)
                 return;
 
-            if (GamemodeManager.GetTileAtPosition(pos + direction * Game1.tileSize))
+            if (GamemodeManager.GetTileAtPosition(pos + direction * Game1.tileSize / 2))
             {
                 pos += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 if (Vector2.Distance(pos, destination) < 1)
@@ -81,7 +83,6 @@ namespace Pacman
             else if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
                 ChangeDirection(new Vector2(1, 0));
-                
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
@@ -91,15 +92,17 @@ namespace Pacman
             {
                 ChangeDirection(new Vector2(0, 1));
             }
+
+            
         }
 
         public void ChangeDirection(Vector2 dir)
         {
             direction = dir;
-            Vector2 newDestination = pos + direction * Game1.tileSize;
+            Vector2 newDestination = pos + direction * Game1.tileSize / 2;
             if (GamemodeManager.GetTileAtPosition(newDestination))
             {
-                destination = newDestination;
+                destination = newDestination; //This might be the thing causing weird movement collision
             }
         }
 
@@ -130,6 +133,10 @@ namespace Pacman
             if (direction.Y <= -1)
             {
                 spriteBatch.Draw(tex, hitbox, currentAnimation, Color.White, 4.7f, origin, SpriteEffects.None, 0);
+            }
+            if (direction.Y == 0 && direction.X == 0)
+            {
+                spriteBatch.Draw(tex, hitbox, currentAnimation, Color.White, 0f, origin, SpriteEffects.None, 0);
             }
             
         }
