@@ -67,6 +67,10 @@ namespace Pacman
             if (GamemodeManager.GetTileAtPosition(pos + direction * Game1.tileSize))
             {
                 pos += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (Vector2.Distance(pos, destination) < 1)
+                {
+                    pos = destination;
+                }
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
@@ -106,6 +110,7 @@ namespace Pacman
             PlayerMoving(gameTime);
             hitbox.X = (int)pos.X;
             hitbox.Y = (int)pos.Y;
+            
         }
 
         public override void Draw(SpriteBatch spriteBatch)
