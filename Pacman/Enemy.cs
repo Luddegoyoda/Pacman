@@ -42,21 +42,21 @@ namespace Pacman
             pathFound = false;
             this.enemyType = ENEMYTYPE;
             targetPosition = Vector2.Zero;
-            switch (enemyType)
-            {
-                case ENEMYTYPE.RED:
-                    this.speed = 50f;
-                    break;
-                case ENEMYTYPE.PINK:
-                    this.speed = 48f;
-                    break;
-                case ENEMYTYPE.CYAN:
-                    this.speed = 50f;
-                    break;
-                case ENEMYTYPE.ORANGE:
-                    this.speed = 49f;
-                    break;
-            }
+            //switch (enemyType)
+            //{
+            //    case ENEMYTYPE.RED:
+            //        this.speed = 50f;
+            //        break;
+            //    case ENEMYTYPE.PINK:
+            //        this.speed = 48f;
+            //        break;
+            //    case ENEMYTYPE.CYAN:
+            //        this.speed = 50f;
+            //        break;
+            //    case ENEMYTYPE.ORANGE:
+            //        this.speed = 49f;
+            //        break;
+            //}
         }
 
         /// <summary>
