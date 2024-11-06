@@ -144,12 +144,12 @@ namespace Pacman
 
         public static bool GetTileAtPosition(Vector2 pos)
         {
-            try
-            {
-                return tileArray[(int)pos.X / tileSize, (int)pos.Y / tileSize].notWalkable;
-            }
-            catch { return false; } //TODO: Pink always seems to crash/freeze the game if you move left directly after start. wtf 
-            
+            //try
+            //{
+            return tileArray[(int)pos.X / tileSize, (int)pos.Y / tileSize].notWalkable;
+            //}
+            //catch { return false; } 
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
