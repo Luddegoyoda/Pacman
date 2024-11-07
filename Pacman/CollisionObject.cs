@@ -16,7 +16,6 @@ namespace Pacman
         public CollisionObject(Vector2 pos, Texture2D tex, Rectangle hitbox) : base(pos, tex)
         { 
             this.hitbox = hitbox;
-            
         }
 
 

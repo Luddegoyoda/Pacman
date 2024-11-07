@@ -36,6 +36,7 @@ namespace Pacman
             this.pos = pos;
             this.tex = tex;
             this.hitbox = rec;
+            hitbox = new Rectangle((int)pos.X, (int)pos.Y, Game1.tileSize, Game1.tileSize);
             posRef = pos;
             isAlive = true;
             enRouteToDestitation = false;
@@ -43,6 +44,7 @@ namespace Pacman
             this.enemyType = ENEMYTYPE;
             targetPosition = Vector2.Zero;
         }
+       
 
         public void CalculatePath(Vector2 targetPos, GameTime gameTime)
         {
@@ -153,10 +155,13 @@ namespace Pacman
            
         }
 
+       
+
         public override void Update(GameTime gameTime)
         {
             hitbox.X = (int)pos.X;
             hitbox.Y = (int)pos.Y;
+
             
             
             //if (smallestIndex == 1)

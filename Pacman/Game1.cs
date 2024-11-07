@@ -64,7 +64,7 @@ namespace Pacman
             gamemodeManager.Update(gameTime);
 
             entityManager.Update(gameTime);
-
+            
 
             base.Update(gameTime);
         }

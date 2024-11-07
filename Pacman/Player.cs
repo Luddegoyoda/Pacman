@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SharpDX.Direct3D9;
+using System.Runtime.CompilerServices;
+
 
 namespace Pacman
 {
@@ -30,16 +27,20 @@ namespace Pacman
        
         Rectangle currentAnimation;
 
-        public Player(Vector2 pos, Texture2D tex, Rectangle hitbox) : base(pos, tex, hitbox) 
+
+        public Player(Vector2 pos, Texture2D tex, Rectangle rec) : base(pos, tex, rec) 
         {
             this.pos = pos;
             this.tex = tex;
-            this.hitbox = hitbox;
+            this.hitbox = rec;
+            hitbox = new Rectangle((int)pos.X, (int)pos.Y, Game1.tileSize, Game1.tileSize);
             currentAnimation = AnimationManager.playerEatAnimation[0];
             isAlive = true;
             origin = new Vector2(Game1.spriteSize / 2f, Game1.spriteSize / 2f);
-            hitbox = new Rectangle((int)pos.X, (int)pos.Y, Game1.tileSize, Game1.tileSize);
+            
+
         }
+        
 
         public override void Animate(GameTime gameTime)
         {
@@ -69,10 +70,7 @@ namespace Pacman
             if (GamemodeManager.GetTileAtPosition(pos + direction * Game1.tileSize / 2))
             {
                 pos += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                if (Vector2.Distance(pos, destination) < 1)
-                {
-                    pos = destination;
-                }
+                
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Left))

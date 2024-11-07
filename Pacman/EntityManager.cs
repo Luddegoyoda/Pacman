@@ -60,6 +60,12 @@ namespace Pacman
             {
                 enemy.Update(gameTime);
                 enemy.CalculatePath(player.pos, gameTime);
+
+                if (player.hitbox.Intersects(enemy.hitbox))
+                {
+                    player.health -= 1;
+                }
+
             }
         }
 
