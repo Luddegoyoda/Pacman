@@ -18,6 +18,7 @@ namespace Pacman
         public int health = 3;
 
         float speed = 50f;
+        float chaseSpeed = 65f;
 
         public new Vector2 pos;
 
@@ -27,6 +28,7 @@ namespace Pacman
         Vector2 origin;
 
         public bool isAlive = false;
+        public bool isEmpowered = false;
        
         Rectangle currentAnimation;
 
@@ -68,7 +70,15 @@ namespace Pacman
 
             if (GamemodeManager.GetTileAtPosition(pos + direction * Game1.tileSize / 2))
             {
-                pos += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (isEmpowered)
+                {
+                    pos += direction * chaseSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
+                else
+                {
+                    pos += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
+                
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
@@ -89,7 +99,7 @@ namespace Pacman
                 ChangeDirection(new Vector2(0, 1));
             }
 
-            
+
         }
 
         public void ChangeDirection(Vector2 dir)
@@ -106,9 +116,12 @@ namespace Pacman
         public override void Update(GameTime gameTime)
         {
             Animate(gameTime);
+            
             PlayerMoving(gameTime);
             hitbox.X = (int)pos.X;
             hitbox.Y = (int)pos.Y;
+
+            
         }
 
         public override void Draw(SpriteBatch spriteBatch)

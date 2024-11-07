@@ -128,6 +128,7 @@ namespace Pacman
                     if (result[i][j] == 'S')//Super pellet (Power up) sprite
                     {
                         tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.blackTex, true, new Rectangle(j * Game1.tileSize, i * Game1.tileSize, Game1.tileSize, Game1.tileSize));
+                        EntityManager.powerupLocations.Add(tileArray[j, i].pos);
                     }
                     if (result[i][j] == 'T')//TP
                     {

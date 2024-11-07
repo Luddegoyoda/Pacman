@@ -8,23 +8,24 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Pacman
 {
-    public class Food : CollisionObject
+    public class Powerup : CollisionObject
     {
         public bool isAlive;
-        public Food(Vector2 pos, Texture2D tex, Rectangle hitbox) : base(pos, tex, hitbox)
+        public Powerup(Vector2 pos, Texture2D tex, Rectangle hitbox) : base(pos, tex, hitbox)
         {
             this.pos = pos;
             this.tex = tex;
             this.hitbox = hitbox;
-            isAlive= true;
+            isAlive = true;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (isAlive)
             {
-                spriteBatch.Draw(tex, hitbox, AnimationManager.foodTex, Color.White);
+                spriteBatch.Draw(tex, hitbox, AnimationManager.powerUpTex, Color.White);
             }
         }
     }
 }
+    
