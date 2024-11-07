@@ -25,7 +25,7 @@ namespace Pacman
         float calculateTime = 0;
 
         public enum ENEMYTYPE { RED, PINK, CYAN, ORANGE };
-        ENEMYTYPE enemyType;
+        public ENEMYTYPE enemyType;
 
         List<Vector2> confirmedTiles = new List<Vector2>();
 
@@ -43,13 +43,37 @@ namespace Pacman
             pathFound = false;
             this.enemyType = ENEMYTYPE;
             targetPosition = Vector2.Zero;
+            switch (enemyType)
+            {
+                case ENEMYTYPE.RED:
+                    this.speed = 49f;
+                    break;
+                case ENEMYTYPE.PINK:
+                    this.speed = 48f;
+                    break;
+                case ENEMYTYPE.CYAN:
+                    this.speed = 50f;
+                    break;
+                case ENEMYTYPE.ORANGE:
+                    this.speed = 47f;
+                    break;
+            }
         }
-       
 
-        public void CalculatePath(Vector2 targetPos, GameTime gameTime)
+        /// <summary>
+        /// Find the position of all tiles around the enemy. The tile with the closest distance to the player is saved and a positionReference is marked as it being there. 
+        /// From there it keeps going from the posRef and repeats the process, making sure no duplicate tiles are selected (this is what fixes ai being stuck). 
+        /// Once it reaches within 10 distance of the given position, 20 waypoints has been reached, or no other alternative way is available the enemy moves to the last waypoint one by one.
+        /// During the movement of the enemy no other pathfinding can be done until it is marked as no longer en route. The enemy is either A, calculating next route. Or B, moving to destination.
+        /// </summary>
+    }
+
+    public void CalculatePath(Vector2 targetPos, GameTime gameTime)
         {
-            Vector2[] tilesToCheck = new Vector2[4]; //Find the 4 tiles around us. 
-            targetPosition = targetPos;
+            Vector2[] tilesToCheck = new Vector2[4];
+
+            targetPosition.X = (int)targetPos.X;
+            targetPosition.Y = (int)targetPos.Y;
             if (!enRouteToDestitation && !pathFound)
             {
                 if (calculateTime > calculateCooldown)
@@ -132,9 +156,21 @@ namespace Pacman
                     }
                     
                     posRef = tilesToCheck[smallestIndex];
+
+                    if (posRef.X > 1000) //if no path is available say its done and ready to move there
+                    {
+                        pathFound = true;
+                        wayPointReachedCounter = 0;
+                    }
+
                     confirmedTiles.Add(posRef);
-                    
-                    if (50 < Vector2.Distance(posRef,targetPos))
+
+                    if (confirmedTiles.Count > 20 ) //crash fix and optimisation at once. poggers
+                    {
+                        pathFound = true;
+                        wayPointReachedCounter = 0;
+                    }
+                    else if (50 < Vector2.Distance(posRef,targetPos))
                     {
                         CalculatePath(targetPos, gameTime);
                     }
@@ -143,16 +179,12 @@ namespace Pacman
                         pathFound = true;
                         wayPointReachedCounter = 0;
                     }
-                            
-                            
-                int j = 0;
                 }
                 else
                 {
                     calculateTime += (int)gameTime.ElapsedGameTime.TotalMilliseconds;
                 }
             }
-           
         }
 
        
@@ -161,29 +193,10 @@ namespace Pacman
         {
             hitbox.X = (int)pos.X;
             hitbox.Y = (int)pos.Y;
-
             
-            
-            //if (smallestIndex == 1)
-            //{
-            //    direction = new Vector2(-1, 0);
-            //}
-            //else if (smallestIndex == 2)
-            //{
-            //    direction = new Vector2(1, 0);
-            //}
-            //else if (smallestIndex == 0)
-            //{
-            //    direction = new Vector2(0, -1);
-            //}
-            //else if (smallestIndex == 3)
-            //{
-            //    direction = new Vector2(0, 1);
-            //}
-
+           
             if (pathFound)
             {
-                
                     if((int)pos.X - confirmedTiles[wayPointReachedCounter].X > 0)
                     {
                         direction = new Vector2(-1,0);

@@ -39,10 +39,10 @@ namespace Pacman
 
         void SpawnEnemies()
         {
-            enemyList.Add(new Enemy(new Vector2(480, 480), TextureManager.spriteSheet, new Rectangle(480, 480, Game1.spriteSize, Game1.spriteSize), Enemy.ENEMYTYPE.RED));
-            enemyList.Add(new Enemy(new Vector2(500, 480), TextureManager.spriteSheet, new Rectangle(500, 480, Game1.spriteSize, Game1.spriteSize), Enemy.ENEMYTYPE.PINK));
-            enemyList.Add(new Enemy(new Vector2(500, 500), TextureManager.spriteSheet, new Rectangle(500, 500, Game1.spriteSize, Game1.spriteSize), Enemy.ENEMYTYPE.CYAN));
-            enemyList.Add(new Enemy(new Vector2(480, 500), TextureManager.spriteSheet, new Rectangle(480, 500, Game1.spriteSize, Game1.spriteSize), Enemy.ENEMYTYPE.ORANGE));
+            enemyList.Add(new Enemy(new Vector2(490, 490), TextureManager.spriteSheet, new Rectangle(480, 480, Game1.spriteSize, Game1.spriteSize), Enemy.ENEMYTYPE.RED));
+            enemyList.Add(new Enemy(new Vector2(522, 522), TextureManager.spriteSheet, new Rectangle(480, 480, Game1.spriteSize, Game1.spriteSize), Enemy.ENEMYTYPE.PINK));
+            enemyList.Add(new Enemy(new Vector2(394, 468), TextureManager.spriteSheet, new Rectangle(520, 460, Game1.spriteSize, Game1.spriteSize), Enemy.ENEMYTYPE.CYAN));
+            enemyList.Add(new Enemy(new Vector2(490, 522), TextureManager.spriteSheet, new Rectangle(480, 500, Game1.spriteSize, Game1.spriteSize), Enemy.ENEMYTYPE.ORANGE));
         }
 
         public void Update(GameTime gameTime)
@@ -58,14 +58,17 @@ namespace Pacman
             }
             foreach(Enemy enemy in enemyList)
             {
+                
                 enemy.Update(gameTime);
-                enemy.CalculatePath(player.pos, gameTime);
+                 //if (enemy.enemyType == Enemy.ENEMYTYPE.PINK)
+                //{
+                //    enemy.CalculatePath(player.pos /2, gameTime);
+                //}
+                //else
+                //{
 
-                if (player.hitbox.Intersects(enemy.hitbox))
-                {
-                    player.health -= 1;
-                }
-
+                    enemy.CalculatePath(player.pos, gameTime);
+                //}
             }
         }
 
