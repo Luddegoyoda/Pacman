@@ -147,7 +147,8 @@ namespace Pacman
             PlayerMoving(gameTime);
             hitbox.X = (int)pos.X;
             hitbox.Y = (int)pos.Y;
-
+            hitbox.Width = Game1.tileSize;
+            hitbox.Height = Game1.tileSize;
 
         }
 
