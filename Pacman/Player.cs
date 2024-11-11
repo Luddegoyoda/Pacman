@@ -67,6 +67,8 @@ namespace Pacman
             if (!isAlive)
                 return;
 
+            CheckForTeleporter();
+
             if (GamemodeManager.GetTileAtPosition(pos + direction * Game1.tileSize / 2))
             {
                 if (isEmpowered)
@@ -97,8 +99,27 @@ namespace Pacman
             {
                 ChangeDirection(new Vector2(0, 1));
             }
+        }
 
+        private void CheckForTeleporter()
+        {
+            foreach (var teleporter in GamemodeManager.teleporters)
+            {
+                if (hitbox.Intersects(new Rectangle((int)teleporter.X, (int)teleporter.Y, Game1.tileSize, Game1.tileSize)))
+                {
 
+                    if (pos.X < Game1.screenWidth / 2)
+                    {
+
+                        pos = new Vector2(Game1.screenWidth - Game1.tileSize * 2, pos.Y);
+                    }
+                    else if (pos.X >= Game1.screenWidth / 2)
+                    {
+
+                        pos = new Vector2(Game1.tileSize * 2, pos.Y);
+                    }
+                }
+            }
         }
 
         public void ChangeDirection(Vector2 dir)

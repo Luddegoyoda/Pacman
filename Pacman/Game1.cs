@@ -14,9 +14,10 @@ namespace Pacman
         GamemodeManager gamemodeManager;
         EntityManager entityManager;
 
-        Menu menu;
         public enum GAMESTATE {MENU, PLAYING, LOST, WON };
         public static GAMESTATE gameState = 0;
+
+        public static int screenWidth = 960;
 
         public static int spriteSize = 16;
         public static int tileSize = 32;
@@ -66,7 +67,11 @@ namespace Pacman
 
             gamemodeManager.Update(gameTime);
 
-            entityManager.Update(gameTime);
+            if (gameState == GAMESTATE.PLAYING)
+            {
+                entityManager.Update(gameTime);
+            }
+            
 
 
             base.Update(gameTime);

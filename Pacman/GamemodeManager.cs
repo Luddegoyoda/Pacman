@@ -23,11 +23,14 @@ namespace Pacman
         string fileName = "map.txt";
         bool mapCreated;
         bool menuCreated;
-        Button startKnapp;
+        Button startButton;
+
+        public static List<Vector2> teleporters = new List<Vector2>();
+
         public GamemodeManager()
         {
             // Initialize the button with a texture and position.
-            startKnapp = new Button(TextureManager.startButtonTex, new Vector2(500-TextureManager.startButtonTex.Width/2, 500 - TextureManager.startButtonTex.Height/2));
+            startButton = new Button(TextureManager.startButtonTex, new Vector2(500-TextureManager.startButtonTex.Width/2, 500 - TextureManager.startButtonTex.Height/2));
         }
 
 
@@ -38,16 +41,13 @@ namespace Pacman
             
             switch (Game1.gameState)
             {
-
                 case GAMESTATE.MENU:
-                   
-
                     if (!mapCreated)
                     {
                         CreateLevel(fileName);
                         mapCreated = true;
                     }
-                    if (startKnapp.isPressed())
+                    if (startButton.isPressed())
                     {
                         Game1.gameState = Game1.GAMESTATE.PLAYING;
                     }
@@ -156,7 +156,9 @@ namespace Pacman
                     }
                     if (result[i][j] == 'T')//TP
                     {
-                        tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.blackTex, true, new Rectangle(j * Game1.tileSize, i * Game1.tileSize, Game1.tileSize, Game1.tileSize));
+                        var teleporterTile = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.blackTex, true, new Rectangle(j * Game1.tileSize, i * Game1.tileSize, Game1.tileSize, Game1.tileSize));
+                        tileArray[j, i] = teleporterTile;
+                        teleporters.Add(teleporterTile.pos);
                     }
                     //else
                     //{
@@ -190,8 +192,8 @@ namespace Pacman
             {
                 // Draw menu background and start button
                 spriteBatch.Draw(TextureManager.menuTex, new Rectangle(0, 0, 960, 1000), Color.White);
-                startKnapp.Draw(spriteBatch);
-            }
+                startButton.Draw(spriteBatch);
+            }   
             else if(Game1.gameState == Game1.GAMESTATE.PLAYING)
             {
                 foreach (Tile tile in tileArray)
