@@ -14,7 +14,7 @@ namespace Pacman
         GamemodeManager gamemodeManager;
         EntityManager entityManager;
 
-        Menu menu;
+        
         public enum GAMESTATE {MENU, PLAYING, LOST, WON };
         public static GAMESTATE gameState = 0;
 
