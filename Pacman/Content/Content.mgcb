@@ -43,7 +43,7 @@
 /processorParam:TextureFormat=Color
 /build:Pacman menu.png
 
-#begin press_start.png
+#begin pressStart.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -53,7 +53,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:press_start.png
+/build:pressStart.png
 
 #begin SpriteSheet.png
 /importer:TextureImporter
@@ -66,6 +66,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:SpriteSheet.png
+
+#begin Startknapp.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Startknapp.png
 
 #begin Tileset.png
 /importer:TextureImporter

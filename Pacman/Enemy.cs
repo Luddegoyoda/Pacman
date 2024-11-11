@@ -66,130 +66,130 @@ namespace Pacman
         /// Once it reaches within 10 distance of the given position, 20 waypoints has been reached, or no other alternative way is available the enemy moves to the last waypoint one by one.
         /// During the movement of the enemy no other pathfinding can be done until it is marked as no longer en route. The enemy is either A, calculating next route. Or B, moving to destination.
         /// </summary>
-    }
+    
 
     public void CalculatePath(Vector2 targetPos, GameTime gameTime)
+    {
+        Vector2[] tilesToCheck = new Vector2[4];
+
+        targetPosition.X = (int)targetPos.X;
+        targetPosition.Y = (int)targetPos.Y;
+        if (!enRouteToDestitation && !pathFound)
         {
-            Vector2[] tilesToCheck = new Vector2[4];
-
-            targetPosition.X = (int)targetPos.X;
-            targetPosition.Y = (int)targetPos.Y;
-            if (!enRouteToDestitation && !pathFound)
+            if (calculateTime > calculateCooldown)
             {
-                if (calculateTime > calculateCooldown)
+                for (int i = 0; i < tilesToCheck.Length; i++)
                 {
-                    for (int i = 0; i < tilesToCheck.Length; i++)
+                    switch (i)
                     {
-                        switch (i)
-                        {
-                            case 0:
-                                Vector2 newDestination = posRef + new Vector2(0, -1) * Game1.tileSize;
-                                newDestination.Floor();
-                                if (GamemodeManager.GetTileAtPosition(new Vector2(newDestination.X, newDestination.Y)))
-                                {
-                                    tilesToCheck[i] = new Vector2(newDestination.X, newDestination.Y);
-                                }
-                                else
-                                {
-                                    tilesToCheck[i] = new Vector2(900000, 900000);
-                                }
-                                break;
-
-                            case 1:
-                                newDestination = posRef + new Vector2(-1, 0) * Game1.tileSize;
-                                newDestination.Floor();
-                                if (GamemodeManager.GetTileAtPosition(new Vector2(newDestination.X, newDestination.Y)))
-                                {
-                                    tilesToCheck[i] = new Vector2(newDestination.X, newDestination.Y);
-                                }
-                                else
-                                {
-                                    tilesToCheck[i] = new Vector2(900000, 900000);
-                                }
-                                break;
-
-                            case 2:
-                                newDestination = posRef + new Vector2(1, 0) * Game1.tileSize;
-                                newDestination.Floor();
-                                if (GamemodeManager.GetTileAtPosition(new Vector2(newDestination.X, newDestination.Y)))
-                                {
-                                    tilesToCheck[i] = new Vector2(newDestination.X, newDestination.Y);
-                                }
-                                else
-                                {
-                                    tilesToCheck[i] = new Vector2(900000, 900000);
-                                }
-                                break;
-
-                            case 3:
-                                newDestination = posRef + new Vector2(0, 1) * Game1.tileSize;
-                                newDestination.Floor();
-                                if (GamemodeManager.GetTileAtPosition(new Vector2(newDestination.X, newDestination.Y)))
-                                {
-                                    tilesToCheck[i] = new Vector2(newDestination.X, newDestination.Y);
-                                }
-                                else
-                                {
-                                    tilesToCheck[i] = new Vector2(900000, 900000);
-                                }
-                                break;
-                        }
-                        foreach(Vector2 position in confirmedTiles)
-                        {
-                            if (tilesToCheck[i] == position)
+                        case 0:
+                            Vector2 newDestination = posRef + new Vector2(0, -1) * Game1.tileSize;
+                            newDestination.Floor();
+                            if (GamemodeManager.GetTileAtPosition(new Vector2(newDestination.X, newDestination.Y)))
                             {
-                                tilesToCheck[i] = new Vector2(99999,99999);
+                                tilesToCheck[i] = new Vector2(newDestination.X, newDestination.Y);
                             }
+                            else
+                            {
+                                tilesToCheck[i] = new Vector2(900000, 900000);
+                            }
+                            break;
+
+                        case 1:
+                            newDestination = posRef + new Vector2(-1, 0) * Game1.tileSize;
+                            newDestination.Floor();
+                            if (GamemodeManager.GetTileAtPosition(new Vector2(newDestination.X, newDestination.Y)))
+                            {
+                                tilesToCheck[i] = new Vector2(newDestination.X, newDestination.Y);
+                            }
+                            else
+                            {
+                                tilesToCheck[i] = new Vector2(900000, 900000);
+                            }
+                            break;
+
+                        case 2:
+                            newDestination = posRef + new Vector2(1, 0) * Game1.tileSize;
+                            newDestination.Floor();
+                            if (GamemodeManager.GetTileAtPosition(new Vector2(newDestination.X, newDestination.Y)))
+                            {
+                                tilesToCheck[i] = new Vector2(newDestination.X, newDestination.Y);
+                            }
+                            else
+                            {
+                                tilesToCheck[i] = new Vector2(900000, 900000);
+                            }
+                            break;
+
+                        case 3:
+                            newDestination = posRef + new Vector2(0, 1) * Game1.tileSize;
+                            newDestination.Floor();
+                            if (GamemodeManager.GetTileAtPosition(new Vector2(newDestination.X, newDestination.Y)))
+                            {
+                                tilesToCheck[i] = new Vector2(newDestination.X, newDestination.Y);
+                            }
+                            else
+                            {
+                                tilesToCheck[i] = new Vector2(900000, 900000);
+                            }
+                            break;
+                    }
+                    foreach (Vector2 position in confirmedTiles)
+                    {
+                        if (tilesToCheck[i] == position)
+                        {
+                            tilesToCheck[i] = new Vector2(99999, 99999);
                         }
                     }
-                    float smallestDistance = 99999;
-                    float[] distances = new float[4];
+                }
+                float smallestDistance = 99999;
+                float[] distances = new float[4];
 
-                    for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 4; i++)
+                {
+                    distances[i] = Vector2.Distance(targetPos, tilesToCheck[i]);
+                    if (smallestDistance > distances[i])
                     {
-                        distances[i] = Vector2.Distance(targetPos, tilesToCheck[i]);
-                        if (smallestDistance > distances[i])
-                        {
-                            smallestDistance = distances[i];
-                            smallestIndex = i;
-                        }   
+                        smallestDistance = distances[i];
+                        smallestIndex = i;
                     }
-                    
-                    posRef = tilesToCheck[smallestIndex];
+                }
 
-                    if (posRef.X > 1000) //if no path is available say its done and ready to move there
-                    {
-                        pathFound = true;
-                        wayPointReachedCounter = 0;
-                    }
+                posRef = tilesToCheck[smallestIndex];
 
-                    confirmedTiles.Add(posRef);
+                if (posRef.X > 1000) //if no path is available say its done and ready to move there
+                {
+                    pathFound = true;
+                    wayPointReachedCounter = 0;
+                }
 
-                    if (confirmedTiles.Count > 20 ) //crash fix and optimisation at once. poggers
-                    {
-                        pathFound = true;
-                        wayPointReachedCounter = 0;
-                    }
-                    else if (50 < Vector2.Distance(posRef,targetPos))
-                    {
-                        CalculatePath(targetPos, gameTime);
-                    }
-                    else
-                    {
-                        pathFound = true;
-                        wayPointReachedCounter = 0;
-                    }
+                confirmedTiles.Add(posRef);
+
+                if (confirmedTiles.Count > 20) //crash fix and optimisation at once. poggers
+                {
+                    pathFound = true;
+                    wayPointReachedCounter = 0;
+                }
+                else if (50 < Vector2.Distance(posRef, targetPos))
+                {
+                    CalculatePath(targetPos, gameTime);
                 }
                 else
                 {
-                    calculateTime += (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+                    pathFound = true;
+                    wayPointReachedCounter = 0;
                 }
             }
+            else
+            {
+                calculateTime += (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+            }
         }
+    }
 
-       
 
-        public override void Update(GameTime gameTime)
+
+    public override void Update(GameTime gameTime)
         {
             hitbox.X = (int)pos.X;
             hitbox.Y = (int)pos.Y;

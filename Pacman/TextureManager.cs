@@ -16,11 +16,12 @@ namespace Pacman
         public static Texture2D startButtonTex;
         public static void LoadTextures(ContentManager content)
         {
+            startButtonTex = content.Load<Texture2D>("Startknapp");
             spriteSheet = content.Load<Texture2D>("SpriteSheet");
             Tileset = content.Load<Texture2D>("Tileset");
             blackTex = content.Load<Texture2D>("blackTex"); 
             menuTex = content.Load<Texture2D>("Pacman menu"); 
-            startButtonTex = content.Load<Texture2D>("press_start"); 
+            
 
         
         }
