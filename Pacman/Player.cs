@@ -18,7 +18,7 @@ namespace Pacman
         public int health = 3;
 
         float speed = 50f;
-        float chaseSpeed = 65f;
+        float chaseSpeed = 70f;
 
         public new Vector2 pos;
 
@@ -51,7 +51,6 @@ namespace Pacman
             {
                 timeSinceLastFrame -= timeToAnimate;
                 
-
                 currentAnimation = AnimationManager.playerEatAnimation[animationState];
 
                 animationState++;

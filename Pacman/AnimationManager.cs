@@ -51,68 +51,70 @@ namespace Pacman
         };
 
         //purple ghost
-        public static Rectangle[] purpleGhostLeft =
+        public static Rectangle[] pinkGhostLeft =
        {
             new Rectangle (Game1.spriteSize, 2 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
             new Rectangle (1 * Game1.spriteSize, 2 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
         };
-        public static Rectangle[] purpleGhostRight =
+        public static Rectangle[] pinkGhostRight =
         {
             new Rectangle (2 * Game1.spriteSize, 2 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
             new Rectangle (3 * Game1.spriteSize, 2 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
         };
-        public static Rectangle[] purpleGhostUp =
+        public static Rectangle[] pinkGhostUp =
         {
             new Rectangle (4 * Game1.spriteSize, 2 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
             new Rectangle (5 * Game1.spriteSize, 2 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize)
         };
-        public static Rectangle[] purpleGhostDown =
+        public static Rectangle[] pinkGhostDown =
         {
             new Rectangle (6 * Game1.spriteSize, 2 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
             new Rectangle (7 * Game1.spriteSize, 2 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize)
         };
 
         //blue ghost
-        public static Rectangle[] blueGhostLeft =
+        public static Rectangle[] cyanGhostLeft =
        {
             new Rectangle (Game1.spriteSize, 3 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
             new Rectangle (1 * Game1.spriteSize, 3 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
         };
-        public static Rectangle[] blueGhostRight =
+        public static Rectangle[] orangeGhostRight =
         {
             new Rectangle (2 * Game1.spriteSize, 3 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
             new Rectangle (3 * Game1.spriteSize, 3 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
         };
-        public static Rectangle[] blueGhostUp =
+        public static Rectangle[] cyanGhostUp =
         {
             new Rectangle (4 * Game1.spriteSize, 3 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
             new Rectangle (5 * Game1.spriteSize, 3 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize)
         };
-        public static Rectangle[] blueGhostDown =
+        public static Rectangle[] cyanGhostDown =
         {
             new Rectangle (6 * Game1.spriteSize, 3 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
             new Rectangle (7 * Game1.spriteSize, 3 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize)
         };
 
-        public static Rectangle[] redGhostTex =
-        {
-            new Rectangle(0 * Game1.spriteSize, 1*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
-            new Rectangle(1 * Game1.spriteSize, 1*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
-        };
-        public static Rectangle[] pinkGhostTex =
-        {
-            new Rectangle(0 * Game1.spriteSize, 2*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
-            new Rectangle(1 * Game1.spriteSize, 2*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
-        };
-        public static Rectangle[] cyanGhostTex =
-        {
-            new Rectangle(0 * Game1.spriteSize, 3*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
-            new Rectangle(1 * Game1.spriteSize, 3*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
-        };
-        public static Rectangle[] orangeGhostTex =
+        //Orange ghost
+
+        public static Rectangle[] orangeGhostTexLeft =
         {
             new Rectangle(0 * Game1.spriteSize, 4*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
             new Rectangle(1 * Game1.spriteSize, 4*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
+        };
+        public static Rectangle[] orangeGhostTexRight =
+        {
+            new Rectangle(2 * Game1.spriteSize, 4*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
+            new Rectangle(3 * Game1.spriteSize, 4*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
+        };
+        public static Rectangle[] orangeGhostTexUp =
+        {
+            new Rectangle(4 * Game1.spriteSize, 4*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
+            new Rectangle(5 * Game1.spriteSize, 4*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
+        };
+        public static Rectangle[] orangeGhostTexDown =
+        {
+            new Rectangle(6 * Game1.spriteSize, 4*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
+            new Rectangle(7 * Game1.spriteSize, 4*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
         };
 
 

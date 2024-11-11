@@ -15,12 +15,20 @@ namespace Pacman
     {
 
         public static Tile[,] tileArray;
+        public static int score;
+        public static int foodEaten;
+
+        public static int foodGoal;
 
         string fileName = "map.txt";
         bool mapCreated;
 
         public void Update(GameTime gameTime)
         {
+            if (foodEaten >= foodGoal)
+            {
+                Game1.gameState = GAMESTATE.WON;
+            }
             switch (Game1.gameState)
             {
 
@@ -145,11 +153,11 @@ namespace Pacman
 
         public static bool GetTileAtPosition(Vector2 pos)
         {
-            //try
-            //{
-            return tileArray[(int)pos.X / tileSize, (int)pos.Y / tileSize].notWalkable;
-            //}
-            //catch { return false; } 
+            try
+            {
+                return tileArray[(int)pos.X / tileSize, (int)pos.Y / tileSize].notWalkable;
+            }
+            catch { return false; }
 
         }
 

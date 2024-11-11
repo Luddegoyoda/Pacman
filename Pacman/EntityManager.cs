@@ -75,6 +75,7 @@ namespace Pacman
             {
                 SpawnFood();
                 SpawnPowerup();
+                GamemodeManager.foodGoal = foodList.Count;
             }
             if (enemyList.Count < 1)
             {
@@ -105,23 +106,7 @@ namespace Pacman
         }
 
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            player.Draw(spriteBatch);
-            foreach(Food food in foodList)
-            {
-                food.Draw(spriteBatch);
-            }
-            foreach (Powerup powerup in powerUpList)
-            {
-                powerup.Draw(spriteBatch);
-            }
-            foreach (Enemy enemy in enemyList)
-            {
-                enemy.Draw(spriteBatch);
-            }
-        }
-
+        
 
 
         private void PlayerUpdates(GameTime gameTime)
@@ -149,8 +134,12 @@ namespace Pacman
                     {
                         SoundManager.PlayEffect(SoundManager.allSoundEffects[0]);
                     }
+                    else
+                    {
+                        GamemodeManager.score += 100;
+
+                    }
                     food.isAlive= false;
-                    
                 }
             }
             foreach (Powerup powerup in powerUpList)
@@ -160,10 +149,13 @@ namespace Pacman
                     if (powerup.isAlive)
                     {
                         SoundManager.PlayEffect(SoundManager.allSoundEffects[0]);
+                        player.isEmpowered = true;
+                    }
+                    else
+                    {
+                        GamemodeManager.score += 100;
                     }
                     powerup.isAlive = false;
-                    player.isEmpowered= true;
-
                 }
             }
             foreach (Enemy enemy in enemyList)
@@ -173,19 +165,20 @@ namespace Pacman
                     if (player.isEmpowered)
                     {
                         enemy.RespawnPhase();
+                        GamemodeManager.score += 500;
                     }
                     else
                     {
                         player.health--;
                         ResetEntities();
                     }
-                    
                 }
             }
 
             if (player.health <= 0)
             {
                 player.isAlive = false;
+                Game1.gameState = Game1.GAMESTATE.LOST;
             }
 
         }
@@ -201,7 +194,25 @@ namespace Pacman
             }
             SpawnFood();
         }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            player.Draw(spriteBatch);
+            foreach (Food food in foodList)
+            {
+                food.Draw(spriteBatch);
+            }
+            foreach (Powerup powerup in powerUpList)
+            {
+                powerup.Draw(spriteBatch);
+            }
+            foreach (Enemy enemy in enemyList)
+            {
+                enemy.Draw(spriteBatch);
+            }
+        }
+
     }
 
-    
+
 }
