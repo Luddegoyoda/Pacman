@@ -16,7 +16,7 @@ namespace Pacman
 
         Menu menu;
         public enum GAMESTATE {MENU, PLAYING, LOST, WON };
-        public static GAMESTATE gameState;
+        public static GAMESTATE gameState = 0;
 
         public static int spriteSize = 16;
         public static int tileSize = 32;

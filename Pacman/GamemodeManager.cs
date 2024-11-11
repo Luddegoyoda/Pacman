@@ -35,10 +35,7 @@ namespace Pacman
 
         public void Update(GameTime gameTime)
         {
-            if (foodEaten >= foodGoal)
-            {
-                Game1.gameState = GAMESTATE.WON;
-            }
+            
             switch (Game1.gameState)
             {
 
@@ -57,7 +54,10 @@ namespace Pacman
 
                     break;
                 case GAMESTATE.PLAYING:
-                    
+                    if (foodEaten >= foodGoal)
+                    {
+                        Game1.gameState = GAMESTATE.WON;
+                    }
                     break;
                 case GAMESTATE.LOST:
 
@@ -186,7 +186,7 @@ namespace Pacman
                 spriteBatch.Draw(TextureManager.menuTex, new Rectangle(0, 0, 960, 1000), Color.White);
                 startKnapp.Draw(spriteBatch);
             }
-            else
+            else if(Game1.gameState == Game1.GAMESTATE.PLAYING)
             {
                 foreach (Tile tile in tileArray)
                 {
