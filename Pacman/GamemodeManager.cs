@@ -15,6 +15,10 @@ namespace Pacman
     {
 
         public static Tile[,] tileArray;
+        public static int score;
+        public static int foodEaten;
+
+        public static int foodGoal;
 
         string fileName = "map.txt";
         bool mapCreated;
@@ -31,6 +35,10 @@ namespace Pacman
 
         public void Update(GameTime gameTime)
         {
+            if (foodEaten >= foodGoal)
+            {
+                Game1.gameState = GAMESTATE.WON;
+            }
             switch (Game1.gameState)
             {
 
@@ -144,6 +152,7 @@ namespace Pacman
                     if (result[i][j] == 'S')//Super pellet (Power up) sprite
                     {
                         tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.blackTex, true, new Rectangle(j * Game1.tileSize, i * Game1.tileSize, Game1.tileSize, Game1.tileSize));
+                        EntityManager.powerupLocations.Add(tileArray[j, i].pos);
                     }
                     if (result[i][j] == 'T')//TP
                     {
@@ -160,11 +169,11 @@ namespace Pacman
 
         public static bool GetTileAtPosition(Vector2 pos)
         {
-            //try
-            //{
-            return tileArray[(int)pos.X / tileSize, (int)pos.Y / tileSize].notWalkable;
-            //}
-            //catch { return false; } 
+            try
+            {
+                return tileArray[(int)pos.X / tileSize, (int)pos.Y / tileSize].notWalkable;
+            }
+            catch { return false; }
 
         }
 
