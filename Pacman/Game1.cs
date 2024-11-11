@@ -65,10 +65,9 @@ namespace Pacman
             // TODO: Add your update logic here
 
             gamemodeManager.Update(gameTime);
-            if (gameState == GAMESTATE.PLAYING)
-            {
-                entityManager.Update(gameTime);
-            }
+
+            entityManager.Update(gameTime);
+
 
             base.Update(gameTime);
         }

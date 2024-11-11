@@ -107,7 +107,14 @@ namespace Pacman
             Vector2 newDestination = pos + direction * Game1.tileSize / 2;
             if (GamemodeManager.GetTileAtPosition(newDestination))
             {
-                destination = newDestination; //This might be the thing causing weird movement collision
+                destination = newDestination; 
+            }
+            else
+            {
+                if (isEmpowered)
+                {
+                    GamemodeManager.SetTileWalkable(newDestination);
+                }
             }
         }
 

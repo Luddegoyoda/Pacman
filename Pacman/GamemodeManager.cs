@@ -177,6 +177,12 @@ namespace Pacman
 
         }
 
+        public static void SetTileWalkable(Vector2 pos)
+        {  
+            tileArray[(int)pos.X / tileSize, (int)pos.Y / tileSize] = new Tile(new Vector2((int)pos.Y / tileSize * Game1.tileSize, (int)pos.X / tileSize * Game1.tileSize),
+               TextureManager.blackTex, true, new Rectangle((int)pos.Y / tileSize * Game1.tileSize, (int)pos.X / tileSize * Game1.tileSize, Game1.tileSize, Game1.tileSize));
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
 
