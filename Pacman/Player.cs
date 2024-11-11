@@ -29,10 +29,10 @@ namespace Pacman
 
         public bool isAlive = false;
         public bool isEmpowered = false;
-       
+
         Rectangle currentAnimation;
 
-        public Player(Vector2 pos, Texture2D tex, Rectangle hitbox) : base(pos, tex, hitbox) 
+        public Player(Vector2 pos, Texture2D tex, Rectangle hitbox) : base(pos, tex, hitbox)
         {
             this.pos = pos;
             this.tex = tex;
@@ -50,7 +50,7 @@ namespace Pacman
             if (timeSinceLastFrame > timeToAnimate)
             {
                 timeSinceLastFrame -= timeToAnimate;
-                
+
                 currentAnimation = AnimationManager.playerEatAnimation[animationState];
 
                 animationState++;
@@ -77,13 +77,13 @@ namespace Pacman
                 {
                     pos += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 }
-                
+
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
                 ChangeDirection(new Vector2(-1, 0));
-                   
+
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
@@ -122,12 +122,12 @@ namespace Pacman
         public override void Update(GameTime gameTime)
         {
             Animate(gameTime);
-            
+
             PlayerMoving(gameTime);
             hitbox.X = (int)pos.X;
             hitbox.Y = (int)pos.Y;
 
-            
+
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -152,10 +152,10 @@ namespace Pacman
             {
                 spriteBatch.Draw(tex, hitbox, currentAnimation, Color.White, 0f, origin, SpriteEffects.None, 0);
             }
-            
+
         }
 
-        
+
 
     }
 }

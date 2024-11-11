@@ -13,8 +13,10 @@ namespace Pacman
 
         GamemodeManager gamemodeManager;
         EntityManager entityManager;
+
+        Menu menu;
         public enum GAMESTATE {MENU, PLAYING, LOST, WON };
-        public static GAMESTATE gameState;
+        public static GAMESTATE gameState = 0;
 
         public static int spriteSize = 16;
         public static int tileSize = 32;
@@ -30,8 +32,7 @@ namespace Pacman
         {
             // TODO: Add your initialization logic here
 
-            gamemodeManager = new GamemodeManager();
-            entityManager = new EntityManager();
+            
             graphics.PreferredBackBufferHeight = 1000;
             graphics.PreferredBackBufferWidth = 1000;
             graphics.ApplyChanges();
@@ -46,6 +47,8 @@ namespace Pacman
             spriteBatch = new SpriteBatch(GraphicsDevice);
             TextureManager.LoadTextures(Content);
             SoundManager.LoadAllSounds(Content);
+            gamemodeManager = new GamemodeManager();
+            entityManager = new EntityManager();
             entityManager.player = new Player(new Vector2(400, 400), TextureManager.spriteSheet, new Rectangle(0, 0, spriteSize, spriteSize));
 
             // TODO: use this.Content to load your game content here
@@ -63,11 +66,7 @@ namespace Pacman
 
             gamemodeManager.Update(gameTime);
 
-            if (GamemodeManager.tileArray != null)
-            {
-                entityManager.Update(gameTime);
-            }
-           
+            entityManager.Update(gameTime);
 
 
             base.Update(gameTime);
@@ -80,8 +79,13 @@ namespace Pacman
             // TODO: Add your drawing code here
 
             spriteBatch.Begin();
+
+
             gamemodeManager.Draw(spriteBatch);
-            entityManager.Draw(spriteBatch);
+            if (gameState == GAMESTATE.PLAYING)
+            {
+                entityManager.Draw(spriteBatch);
+            }
             spriteBatch.End();
 
 

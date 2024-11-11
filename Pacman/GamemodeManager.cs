@@ -22,6 +22,16 @@ namespace Pacman
 
         string fileName = "map.txt";
         bool mapCreated;
+        bool menuCreated;
+        Button startKnapp;
+        public GamemodeManager()
+        {
+            // Initialize the button with a texture and position.
+            startKnapp = new Button(TextureManager.startButtonTex, new Vector2(500-TextureManager.startButtonTex.Width/2, 500 - TextureManager.startButtonTex.Height/2));
+        }
+
+
+
 
         public void Update(GameTime gameTime)
         {
@@ -30,13 +40,18 @@ namespace Pacman
             {
 
                 case GAMESTATE.MENU:
+                   
+
                     if (!mapCreated)
                     {
-                        
                         CreateLevel(fileName);
                         mapCreated = true;
-                        Game1.gameState = GAMESTATE.PLAYING;
                     }
+                    if (startKnapp.isPressed())
+                    {
+                        Game1.gameState = Game1.GAMESTATE.PLAYING;
+                    }
+
                     break;
                 case GAMESTATE.PLAYING:
                     if (foodEaten >= foodGoal)
@@ -70,6 +85,7 @@ namespace Pacman
             return result;
         }
 
+        
         public void CreateLevel(string fileName)
         {
             List<string> result = ReadFromFile(fileName);
@@ -169,9 +185,19 @@ namespace Pacman
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (Tile tile in tileArray)
+
+            if (Game1.gameState == Game1.GAMESTATE.MENU)
             {
-                tile.Draw(spriteBatch);
+                // Draw menu background and start button
+                spriteBatch.Draw(TextureManager.menuTex, new Rectangle(0, 0, 960, 1000), Color.White);
+                startKnapp.Draw(spriteBatch);
+            }
+            else if(Game1.gameState == Game1.GAMESTATE.PLAYING)
+            {
+                foreach (Tile tile in tileArray)
+                {
+                    tile.Draw(spriteBatch);
+                }
             }
         }
     }

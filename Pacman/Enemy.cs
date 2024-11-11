@@ -7,7 +7,7 @@ namespace Pacman
 {
     public class Enemy : AnimatedObject
     {
-        
+
         public Vector2 targetPosition;
         Vector2 posRef;
         bool isAlive;
@@ -72,7 +72,7 @@ namespace Pacman
                     spawnPoint = EntityManager.enemySpawnLocations[3];
                     break;
             }
-            
+
         }
 
         public override void Animate(GameTime gameTime)
@@ -89,7 +89,7 @@ namespace Pacman
                         if (direction.X >= 1)
                         {
                             currentAnimation = AnimationManager.redGhostLeft[animationState];
-                            
+
                         }
                         if (direction.X <= -1)
                         {
@@ -102,7 +102,7 @@ namespace Pacman
                         if (direction.Y <= -1)
                         {
                             currentAnimation = AnimationManager.redGhostUp[animationState];
-                            
+
                         }
                         if (direction.Y == 0 && direction.X == 0)
                         {
@@ -117,7 +117,7 @@ namespace Pacman
                         }
                         if (direction.X <= -1)
                         {
-                            
+
                             currentAnimation = AnimationManager.pinkGhostRight[animationState];
                         }
                         if (direction.Y >= 1)
@@ -126,7 +126,7 @@ namespace Pacman
                         }
                         if (direction.Y <= -1)
                         {
-                            
+
                             currentAnimation = AnimationManager.pinkGhostUp[animationState];
                         }
                         if (direction.Y == 0 && direction.X == 0)
@@ -142,7 +142,7 @@ namespace Pacman
                         if (direction.X <= -1)
                         {
                             currentAnimation = AnimationManager.orangeGhostRight[animationState];
-                            
+
                         }
                         if (direction.Y >= 1)
                         {
@@ -150,7 +150,7 @@ namespace Pacman
                         }
                         if (direction.Y <= -1)
                         {
-                            
+
                             currentAnimation = AnimationManager.cyanGhostUp[animationState];
                         }
                         if (direction.Y == 0 && direction.X == 0)
@@ -165,7 +165,7 @@ namespace Pacman
                         }
                         if (direction.X <= -1)
                         {
-                            
+
                             currentAnimation = AnimationManager.orangeGhostTexRight[animationState];
                         }
                         if (direction.Y >= 1)
@@ -174,7 +174,7 @@ namespace Pacman
                         }
                         if (direction.Y <= -1)
                         {
-                            
+
                             currentAnimation = AnimationManager.orangeGhostTexUp[animationState];
                         }
                         if (direction.Y == 0 && direction.X == 0)
@@ -183,7 +183,7 @@ namespace Pacman
                         }
                         break;
                 }
-                
+
 
                 animationState++;
 
@@ -264,11 +264,11 @@ namespace Pacman
                             }
                             break;
                     }
-                    foreach(Vector2 position in confirmedTiles)
+                    foreach (Vector2 position in confirmedTiles)
                     {
                         if (tilesToCheck[i] == position)
                         {
-                            tilesToCheck[i] = new Vector2(99999,99999);
+                            tilesToCheck[i] = new Vector2(99999, 99999);
                         }
                     }
                 }
@@ -281,7 +281,7 @@ namespace Pacman
                     {
                         distances[i] = Vector2.Distance(targetPos, tilesToCheck[i]);
 
-                        if (smallestDistance > distances[i]  )
+                        if (smallestDistance > distances[i])
                         {
                             smallestDistance = distances[i];
                             smallestIndex = i;
@@ -315,14 +315,14 @@ namespace Pacman
                     confirmedTiles.Add(posRef);
                 }
 
-                
 
-                if (confirmedTiles.Count > 30 ) 
+
+                if (confirmedTiles.Count > 30)
                 {
                     pathFound = true;
                     wayPointReachedCounter = 0;
                 }
-                else if (50 < Vector2.Distance(posRef,targetPos))
+                else if (50 < Vector2.Distance(posRef, targetPos))
                 {
                     CalculatePath(targetPos);
                 }
@@ -459,7 +459,7 @@ namespace Pacman
             Animate(gameTime);
         }
 
-        
+
 
 
 
@@ -472,7 +472,7 @@ namespace Pacman
                     switch (enemyType)
                     {
                         case ENEMYTYPE.RED:
-                            spriteBatch.Draw(tex, hitbox,currentAnimation, Color.White);
+                            spriteBatch.Draw(tex, hitbox, currentAnimation, Color.White);
                             break;
                         case ENEMYTYPE.PINK:
                             spriteBatch.Draw(tex, hitbox, currentAnimation, Color.White);
@@ -493,7 +493,7 @@ namespace Pacman
                 {
                     spriteBatch.Draw(tex, hitbox, AnimationManager.respawnEyesGhostTex[animationState], Color.White);
                 }
-                
+
 
             }
         }

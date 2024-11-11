@@ -84,11 +84,12 @@ namespace Pacman
             foreach(Enemy enemy in enemyList)
             {
                 enemy.Update(gameTime);
+
                 if (player.isEmpowered)
                 {
                     if (!enemy.isSacred && !enemy.isRespawning)
                     {
-                        enemy.isSacred= true;
+                        enemy.isSacred = true;
                         enemy.CancelMovement();
                     }
                 }
@@ -96,12 +97,11 @@ namespace Pacman
                 {
                     if (enemy.isSacred)
                     {
-                        enemy.isSacred= false;
+                        enemy.isSacred = false;
                         enemy.CancelMovement();
                     }
                 }
                 enemy.CalculatePath(player.pos);
-
             }
         }
 
