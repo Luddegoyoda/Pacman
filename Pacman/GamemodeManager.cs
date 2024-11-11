@@ -25,10 +25,7 @@ namespace Pacman
 
         public void Update(GameTime gameTime)
         {
-            if (foodEaten >= foodGoal)
-            {
-                Game1.gameState = GAMESTATE.WON;
-            }
+            
             switch (Game1.gameState)
             {
 
@@ -42,7 +39,10 @@ namespace Pacman
                     }
                     break;
                 case GAMESTATE.PLAYING:
-                    
+                    if (foodEaten >= foodGoal)
+                    {
+                        Game1.gameState = GAMESTATE.WON;
+                    }
                     break;
                 case GAMESTATE.LOST:
 
@@ -159,6 +159,12 @@ namespace Pacman
             }
             catch { return false; }
 
+        }
+
+        public static void SetTileWalkable(Vector2 pos)
+        {  
+            tileArray[(int)pos.X / tileSize, (int)pos.Y / tileSize] = new Tile(new Vector2((int)pos.Y / tileSize * Game1.tileSize, (int)pos.X / tileSize * Game1.tileSize),
+               TextureManager.blackTex, true, new Rectangle((int)pos.Y / tileSize * Game1.tileSize, (int)pos.X / tileSize * Game1.tileSize, Game1.tileSize, Game1.tileSize));
         }
 
         public void Draw(SpriteBatch spriteBatch)
