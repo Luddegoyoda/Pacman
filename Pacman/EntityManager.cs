@@ -133,11 +133,7 @@ namespace Pacman
                     if (food.isAlive)
                     {
                         SoundManager.PlayEffect(SoundManager.allSoundEffects[0]);
-                    }
-                    else
-                    {
                         GamemodeManager.score += 100;
-
                     }
                     food.isAlive= false;
                 }
@@ -150,9 +146,6 @@ namespace Pacman
                     {
                         SoundManager.PlayEffect(SoundManager.allSoundEffects[0]);
                         player.isEmpowered = true;
-                    }
-                    else
-                    {
                         GamemodeManager.score += 100;
                     }
                     powerup.isAlive = false;
@@ -177,11 +170,12 @@ namespace Pacman
 
             if (player.health <= 0)
             {
-                player.isAlive = false;
                 Game1.gameState = Game1.GAMESTATE.LOST;
+                player.health = 3;
             }
 
         }
+        
 
         void ResetEntities()
         {

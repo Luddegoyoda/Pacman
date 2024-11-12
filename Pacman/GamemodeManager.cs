@@ -23,6 +23,7 @@ namespace Pacman
         string fileName = "map.txt";
         bool mapCreated;
         bool menuCreated;
+        bool savedScore = false;
         Button startButton;
 
         public static List<Vector2> teleporters = new List<Vector2>();
@@ -38,7 +39,6 @@ namespace Pacman
 
         public void Update(GameTime gameTime)
         {
-            
             switch (Game1.gameState)
             {
                 case GAMESTATE.MENU:
@@ -50,6 +50,7 @@ namespace Pacman
                     if (startButton.isPressed())
                     {
                         Game1.gameState = Game1.GAMESTATE.PLAYING;
+                        savedScore = false;
                     }
 
                     break;
@@ -60,10 +61,20 @@ namespace Pacman
                     }
                     break;
                 case GAMESTATE.LOST:
+                    if (!savedScore)
+                    {
+                        Game1.SaveScoreToFile();
+                        savedScore = true;
+                    }
+                    if (Keyboard.GetState().IsKeyDown(Keys.C))
+                    {
+                        Game1.gameState = Game1.GAMESTATE.MENU;
+
+                    }
 
                     break;
                 case GAMESTATE.WON:
-
+                    Game1.SaveScoreToFile();
                     break;
 
             }
@@ -187,19 +198,42 @@ namespace Pacman
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            switch(Game1.gameState)
+            {
+                case Game1.GAMESTATE.MENU:
+                    spriteBatch.Draw(TextureManager.menuTex, new Rectangle(0, 0, 960, 1000), Color.White);
+                    startButton.Draw(spriteBatch);
+                    break;
 
-            if (Game1.gameState == Game1.GAMESTATE.MENU)
-            {
-                // Draw menu background and start button
-                spriteBatch.Draw(TextureManager.menuTex, new Rectangle(0, 0, 960, 1000), Color.White);
-                startButton.Draw(spriteBatch);
-            }   
-            else if(Game1.gameState == Game1.GAMESTATE.PLAYING)
-            {
-                foreach (Tile tile in tileArray)
-                {
-                    tile.Draw(spriteBatch);
-                }
+                case Game1.GAMESTATE.PLAYING:
+                    foreach (Tile tile in tileArray)
+                    {
+                        tile.Draw(spriteBatch);
+                    }
+                    break;
+
+                case Game1.GAMESTATE.WON:
+                    break;
+
+                case Game1.GAMESTATE.LOST:
+                    List<string> list = new List<string>();
+                    if (list.Count <= 0)
+                    {
+                        list = Game1.ReadScoreFromFile();
+                    }
+                    int i = 200;
+                    spriteBatch.DrawString(TextureManager.font, "Highscores:", new Vector2(200, i), Color.White);
+                    
+                    foreach (string s in list)
+                    {
+                        i += 20;
+                        spriteBatch.DrawString(TextureManager.font, s, new Vector2(200, i), Color.White);
+                    }
+                    spriteBatch.DrawString(TextureManager.font, "Press [C] to play again", new Vector2(200, 100), Color.White);
+                    spriteBatch.DrawString(TextureManager.font, "Your score: " + score, new Vector2(200, 140), Color.White);
+
+                    break;
+
             }
         }
     }
