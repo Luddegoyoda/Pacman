@@ -204,7 +204,10 @@ namespace Pacman
             {
                 enemy.Draw(spriteBatch);
             }
-            
+            for (int i = 0; i< player.health; i++)
+            {
+                spriteBatch.Draw(TextureManager.spriteSheet, new Rectangle(830+i * Game1.tileSize, 0, Game1.tileSize, Game1.tileSize), new Rectangle(1 * Game1.spriteSize, 0 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize), Color.White);
+            }
         }
 
     }
