@@ -210,6 +210,7 @@ namespace Pacman
             {
                 enemy.Draw(spriteBatch);
             }
+            
         }
 
     }
