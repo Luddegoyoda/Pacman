@@ -20,6 +20,8 @@ namespace Pacman
 
         public static int foodGoal;
 
+        public int mapsCompleted;
+
         string fileName = "map.txt";
         bool mapCreated;
         bool menuCreated;
@@ -32,6 +34,7 @@ namespace Pacman
         {
             // Initialize the button with a texture and position.
             startButton = new Button(TextureManager.startButtonTex, new Vector2(500-TextureManager.startButtonTex.Width/2, 500 - TextureManager.startButtonTex.Height/2));
+            mapsCompleted = 0;
         }
 
 
@@ -42,16 +45,39 @@ namespace Pacman
             switch (Game1.gameState)
             {
                 case GAMESTATE.MENU:
-                    if (!mapCreated)
-                    {
-                        CreateLevel(fileName);
-                        mapCreated = true;
-                    }
+                    
                     if (startButton.isPressed())
                     {
                         Game1.gameState = Game1.GAMESTATE.PLAYING;
                         savedScore = false;
+                        if (!mapCreated)
+                        {
+                            switch (mapsCompleted)
+                            {
+                                case 0:
+                                    fileName = "map.txt";
+                                    break;
+                                case 1:
+                                    fileName = "map2.txt";
+                                    break;
+                                default:
+                                    fileName = "map.txt";
+                                    break;
+                            }
+                            CreateLevel(fileName);
+                            mapCreated = true;
+                        }
                     }
+                    if (Keyboard.GetState().IsKeyDown(Keys.Q))
+                    {
+                        mapsCompleted = 0;
+                    }
+                    if (Keyboard.GetState().IsKeyDown(Keys.E))
+                    {
+                        mapsCompleted = 1;
+                    }
+                    
+                    
 
                     break;
                 case GAMESTATE.PLAYING:
@@ -78,12 +104,13 @@ namespace Pacman
                     {
                         Game1.SaveScoreToFile();
                         savedScore = true;
+                        
                     }
                     if (Keyboard.GetState().IsKeyDown(Keys.C))
                     {
                         Game1.gameState = Game1.GAMESTATE.MENU;
                         mapCreated = false;
-
+                        mapsCompleted++;
                     }
                     break;
 
