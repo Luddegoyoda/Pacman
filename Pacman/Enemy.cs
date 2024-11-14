@@ -14,7 +14,7 @@ namespace Pacman
         bool enRouteToDestitation;
         bool pathFound;
         public bool isRespawning;
-        public bool isSacred;
+        public bool isScared;
         float speed = 48f;
         float respawnSpeed = 70f;
 
@@ -49,7 +49,7 @@ namespace Pacman
             isAlive = true;
             enRouteToDestitation = false;
             pathFound = false;
-            isSacred = false;
+            isScared = false;
             this.enemyType = ENEMYTYPE;
             targetPosition = Vector2.Zero;
             posCache = pos;
@@ -275,7 +275,7 @@ namespace Pacman
                 float smallestDistance = 99999;
                 float[] distances = new float[4];
 
-                if (!isSacred)
+                if (!isScared)
                 {
                     for (int i = 0; i < 4; i++)
                     {
@@ -446,7 +446,7 @@ namespace Pacman
         {
             CancelMovement();
             isRespawning = true;
-            isSacred = false;
+            isScared = false;
             CalculatePath(spawnPoint);
         }
 
@@ -468,7 +468,7 @@ namespace Pacman
         {
             if (isAlive)
             {
-                if (!isRespawning && !isSacred)
+                if (!isRespawning && !isScared)
                 {
                     switch (enemyType)
                     {
@@ -486,7 +486,7 @@ namespace Pacman
                             break;
                     }
                 }
-                else if (isSacred)
+                else if (isScared)
                 {
                     spriteBatch.Draw(tex, hitbox, AnimationManager.scaredBlueGhostTex[animationState], Color.White);
                 }
