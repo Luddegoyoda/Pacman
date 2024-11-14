@@ -32,6 +32,8 @@ namespace Pacman
         public List<Item> itemList;
         public List<Powerup> powerUpList;
 
+        
+
         public EntityManager()
         {
             enemyList = new List<Enemy>();
@@ -43,6 +45,7 @@ namespace Pacman
             powerupLocations = new List<Vector2>();
             enemySpawnLocations = new List<Vector2>(); //{ new Vector2(490,490), new Vector2(522, 522), new Vector2(394, 468), new Vector2(490, 522)};
             playerSpawnPos= new Vector2(400,400);
+
         }
 
         public void SpawnFood()
@@ -99,17 +102,17 @@ namespace Pacman
 
                 if (player.isEmpowered)
                 {
-                    if (!enemy.isSacred && !enemy.isRespawning)
+                    if (!enemy.isScared && !enemy.isRespawning)
                     {
-                        enemy.isSacred = true;
+                        enemy.isScared = true;
                         enemy.CancelMovement();
                     }
                 }
                 else
                 {
-                    if (enemy.isSacred)
+                    if (enemy.isScared)
                     {
-                        enemy.isSacred = false;
+                        enemy.isScared = false;
                         enemy.CancelMovement();
                     }
                 }
@@ -242,8 +245,9 @@ namespace Pacman
             }
             for (int i = 0; i< player.health; i++)
             {
-                spriteBatch.Draw(TextureManager.spriteSheet, new Rectangle(830+i * Game1.tileSize, 0, Game1.tileSize, Game1.tileSize), new Rectangle(1 * Game1.spriteSize, 0 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize), Color.White);
+                spriteBatch.Draw(TextureManager.spriteSheet, new Rectangle(730+i * Game1.tileSize, 0, Game1.tileSize, Game1.tileSize), new Rectangle(1 * Game1.spriteSize, 0 * Game1.spriteSize, Game1.spriteSize, Game1.spriteSize), Color.White);
             }
+            spriteBatch.DrawString(TextureManager.font, "Your score: " + GamemodeManager.score,new Vector2(830,5),Color.White);
         }
 
     }

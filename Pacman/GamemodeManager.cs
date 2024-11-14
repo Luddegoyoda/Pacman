@@ -254,12 +254,12 @@ namespace Pacman
                     break;
 
                 case Game1.GAMESTATE.WON:
-                    
+
                     if (scoreList.Count <= 0)
                     {
                         scoreList = Game1.ReadScoreFromFile();
                     }
-                    
+
                     spriteBatch.DrawString(TextureManager.font, "Highscores:", new Vector2(200, i), Color.White);
 
                     foreach (string s in scoreList)
@@ -267,8 +267,10 @@ namespace Pacman
                         i += 20;
                         spriteBatch.DrawString(TextureManager.font, s, new Vector2(200, i), Color.White);
                     }
+                    spriteBatch.Draw(TextureManager.victory, new Rectangle(0, 0, 1000, 1000), Color.White);
                     spriteBatch.DrawString(TextureManager.font, "Press [C] to play again", new Vector2(200, 100), Color.White);
                     spriteBatch.DrawString(TextureManager.font, "Your score: " + score, new Vector2(200, 140), Color.White);
+
                     break;
 
                 case Game1.GAMESTATE.LOST:
@@ -284,6 +286,7 @@ namespace Pacman
                         i += 20;
                         spriteBatch.DrawString(TextureManager.font, s, new Vector2(200, i), Color.White);
                     }
+                    spriteBatch.Draw(TextureManager.gameOver, new Rectangle(0, 0, 1000, 1000), Color.White);
                     spriteBatch.DrawString(TextureManager.font, "Press [C] to play again", new Vector2(200, 100), Color.White);
                     spriteBatch.DrawString(TextureManager.font, "Your score: " + score, new Vector2(200, 140), Color.White);
 
