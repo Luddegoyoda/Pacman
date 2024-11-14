@@ -69,12 +69,22 @@ namespace Pacman
                     if (Keyboard.GetState().IsKeyDown(Keys.C))
                     {
                         Game1.gameState = Game1.GAMESTATE.MENU;
-
+                        mapCreated = false;
                     }
 
                     break;
                 case GAMESTATE.WON:
-                    Game1.SaveScoreToFile();
+                    if (!savedScore)
+                    {
+                        Game1.SaveScoreToFile();
+                        savedScore = true;
+                    }
+                    if (Keyboard.GetState().IsKeyDown(Keys.C))
+                    {
+                        Game1.gameState = Game1.GAMESTATE.MENU;
+                        mapCreated = false;
+
+                    }
                     break;
 
             }
@@ -148,9 +158,10 @@ namespace Pacman
                         tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.blackTex, true, new Rectangle(j * Game1.tileSize, i * Game1.tileSize, Game1.tileSize, Game1.tileSize));
                         EntityManager.foodLocations.Add(tileArray[j, i].pos);
                     }
-                    if (result[i][j] == 'M')//Mat sprite
+                    if (result[i][j] == 'M')//Item sprite
                     {
                         tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.blackTex, true, new Rectangle(j * Game1.tileSize, i * Game1.tileSize, Game1.tileSize, Game1.tileSize));
+                        EntityManager.itemLocations.Add(tileArray[j, i].pos);
                     }
                     if (result[i][j] == 'P')//player sprite
                     {
@@ -159,6 +170,7 @@ namespace Pacman
                     if (result[i][j] == 'G')//Ghosts sprite
                     {
                         tileArray[j, i] = new Tile(new Vector2(j * Game1.tileSize, i * Game1.tileSize), TextureManager.blackTex, true, new Rectangle(j * Game1.tileSize, i * Game1.tileSize, Game1.tileSize, Game1.tileSize));
+                        EntityManager.enemySpawnLocations.Add(tileArray[j, i].pos);
                     }
                     if (result[i][j] == 'S')//Super pellet (Power up) sprite
                     {
@@ -198,7 +210,9 @@ namespace Pacman
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            switch(Game1.gameState)
+            List<string> scoreList = new List<string>();
+            int i = 200;
+            switch (Game1.gameState)
             {
                 case Game1.GAMESTATE.MENU:
                     spriteBatch.Draw(TextureManager.menuTex, new Rectangle(0, 0, 960, 1000), Color.White);
@@ -213,19 +227,18 @@ namespace Pacman
                     break;
 
                 case Game1.GAMESTATE.WON:
-                    
-                    List<string> listv = new List<string>();
-                    if (listv.Count <= 0)
-                    {
-                        listv = Game1.ReadScoreFromFile();
-                    }
-                    int p = 200;
-                    spriteBatch.DrawString(TextureManager.font, "Highscores:", new Vector2(200, p), Color.White);
 
-                    foreach (string s in listv)
+                    if (scoreList.Count <= 0)
                     {
-                        p += 20;
-                        spriteBatch.DrawString(TextureManager.font, s, new Vector2(200, p), Color.White);
+                        scoreList = Game1.ReadScoreFromFile();
+                    }
+
+                    spriteBatch.DrawString(TextureManager.font, "Highscores:", new Vector2(200, i), Color.White);
+
+                    foreach (string s in scoreList)
+                    {
+                        i += 20;
+                        spriteBatch.DrawString(TextureManager.font, s, new Vector2(200, i), Color.White);
                     }
                     spriteBatch.Draw(TextureManager.victory, new Rectangle(0, 0, 1000, 1000), Color.White);
                     spriteBatch.DrawString(TextureManager.font, "Press [C] to play again", new Vector2(200, 100), Color.White);
@@ -234,15 +247,14 @@ namespace Pacman
                     break;
 
                 case Game1.GAMESTATE.LOST:
-                    List<string> list = new List<string>();
-                    if (list.Count <= 0)
+                    
+                    if (scoreList.Count <= 0)
                     {
-                        list = Game1.ReadScoreFromFile();
+                        scoreList = Game1.ReadScoreFromFile();
                     }
-                    int i = 200;
                     spriteBatch.DrawString(TextureManager.font, "Highscores:", new Vector2(200, i), Color.White);
                     
-                    foreach (string s in list)
+                    foreach (string s in scoreList)
                     {
                         i += 20;
                         spriteBatch.DrawString(TextureManager.font, s, new Vector2(200, i), Color.White);

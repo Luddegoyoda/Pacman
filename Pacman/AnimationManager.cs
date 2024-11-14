@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Pacman
 {
-    class AnimationManager
+    class AnimationManager //Acts more like a library
     {
         //player animations
         public static Rectangle[] playerEatAnimation =
@@ -95,7 +95,6 @@ namespace Pacman
         };
 
         //Orange ghost
-
         public static Rectangle[] orangeGhostTexLeft =
         {
             new Rectangle(0 * Game1.spriteSize, 4*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
@@ -129,8 +128,6 @@ namespace Pacman
             new Rectangle(4 * Game1.spriteSize, 5*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
             new Rectangle(5 * Game1.spriteSize, 5*Game1.spriteSize, Game1.spriteSize, Game1.spriteSize),
         };
-
-
 
     }
 }

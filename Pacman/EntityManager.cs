@@ -20,13 +20,16 @@ namespace Pacman
         public Vector2 playerSpawnPos;
         public static List<Vector2> enemySpawnLocations;
         public static List<Vector2> foodLocations;
+        public static List<Vector2> itemLocations;
         public static List<Vector2> powerupLocations;
 
         int poweredUpTime = 5000;
         int currentTime = 0;
         
+        Random random = new Random();
 
         public List<Food> foodList;
+        public List<Item> itemList;
         public List<Powerup> powerUpList;
 
         
@@ -35,10 +38,12 @@ namespace Pacman
         {
             enemyList = new List<Enemy>();
             foodList = new List<Food>();
+            itemList = new List<Item>();
             powerUpList = new List<Powerup>();
             foodLocations = new List<Vector2>();
+            itemLocations = new List<Vector2>();
             powerupLocations = new List<Vector2>();
-            enemySpawnLocations = new List<Vector2>() { new Vector2(490,490), new Vector2(522, 522), new Vector2(394, 468), new Vector2(490, 522)};
+            enemySpawnLocations = new List<Vector2>(); //{ new Vector2(490,490), new Vector2(522, 522), new Vector2(394, 468), new Vector2(490, 522)};
             playerSpawnPos= new Vector2(400,400);
 
         }
@@ -60,7 +65,15 @@ namespace Pacman
             {
                 powerUpList.Add(new Powerup(powerUpSpawn, TextureManager.spriteSheet, new Rectangle((int)powerUpSpawn.X + Game1.spriteSize / 2, (int)powerUpSpawn.Y + Game1.spriteSize / 2, Game1.spriteSize, Game1.spriteSize)));
             }
-            foodSpawned = true;
+        }
+
+        public void SpawnItems()
+        {
+            itemList.Clear();
+            foreach (Vector2 itemSpawn in itemLocations)
+            {
+                itemList.Add(new Item(itemSpawn, TextureManager.spriteSheet, new Rectangle((int)itemSpawn.X + Game1.spriteSize / 2, (int)itemSpawn.Y + Game1.spriteSize / 2, Game1.spriteSize, Game1.spriteSize), random.Next(0,7)));
+            }
         }
 
         void SpawnEnemies()
@@ -76,8 +89,7 @@ namespace Pacman
             PlayerUpdates(gameTime);
             if (!foodSpawned)
             {
-                SpawnFood();
-                SpawnPowerup();
+                ResetEntities();
                 GamemodeManager.foodGoal = foodList.Count;
             }
             if (enemyList.Count < 1)
@@ -141,6 +153,18 @@ namespace Pacman
                     food.isAlive= false;
                 }
             }
+            foreach (Item item in itemList)
+            {
+                if (player.hitbox.Intersects(item.hitbox))
+                {
+                    if (item.isAlive)
+                    {
+                        SoundManager.PlayEffect(SoundManager.allSoundEffects[0]);
+                        GamemodeManager.score += item.value;
+                    }
+                    item.isAlive = false;
+                }
+            }
             foreach (Powerup powerup in powerUpList)
             {
                 if (player.hitbox.Intersects(powerup.hitbox))
@@ -165,8 +189,11 @@ namespace Pacman
                     }
                     else
                     {
-                        player.health--;
-                        ResetEntities();
+                        if (!enemy.isRespawning)
+                        {
+                            player.health--;
+                            ResetEntities();
+                        }
                     }
                 }
             }
@@ -190,6 +217,8 @@ namespace Pacman
                 enemyList[i].CancelMovement();
             }
             SpawnFood();
+            SpawnPowerup();
+            SpawnItems();
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -202,6 +231,10 @@ namespace Pacman
             foreach (Powerup powerup in powerUpList)
             {
                 powerup.Draw(spriteBatch);
+            }
+            foreach(Item item in itemList)
+            {
+                item.Draw(spriteBatch);
             }
             foreach (Enemy enemy in enemyList)
             {

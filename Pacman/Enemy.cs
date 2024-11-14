@@ -16,7 +16,7 @@ namespace Pacman
         public bool isRespawning;
         public bool isScared;
         float speed = 48f;
-        float respawnSpeed = 70f;
+        //float respawnSpeed = 70f;
 
         public new Vector2 pos;
         public Vector2 posCache;
