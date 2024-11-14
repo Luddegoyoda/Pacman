@@ -25,6 +25,8 @@ namespace Pacman
         bool menuCreated;
         bool savedScore = false;
         Button startButton;
+        Button Level1;
+        Button Level2;
 
         public static List<Vector2> teleporters = new List<Vector2>();
 

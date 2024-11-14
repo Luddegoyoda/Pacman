@@ -19,7 +19,6 @@ namespace Pacman
 
         public static int screenWidth = 960;
 
-
         public static int spriteSize = 16;
         public static int tileSize = 32;
 
