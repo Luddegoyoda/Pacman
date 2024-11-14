@@ -14,13 +14,17 @@ namespace Pacman
         bool enRouteToDestitation;
         bool pathFound;
         public bool isRespawning;
-        public bool isScared;
+        public bool isSacred;
+        public bool isUsingAStarPathfinding;
+        public bool isUsingBouncingMovement = false;
+        public bool moving = false;
         float speed = 48f;
         //float respawnSpeed = 70f;
 
         public new Vector2 pos;
         public Vector2 posCache;
         public Vector2 spawnPoint;
+        Vector2 destination;
 
         int cacheTime = 3000;
         int currentTime = 0;
@@ -28,6 +32,7 @@ namespace Pacman
         int timeSinceLastFrame = 0;
         int timeToAnimate = 150;
         int animationState = 1;
+        int randomDirection;
         Rectangle currentAnimation;
 
         int wayPointReachedCounter = 0;
@@ -39,6 +44,8 @@ namespace Pacman
         List<Vector2> confirmedTiles = new List<Vector2>();
 
         int smallestIndex = 0;
+
+        Random random;
 
         public Enemy(Vector2 pos, Texture2D tex, Rectangle rec, ENEMYTYPE ENEMYTYPE) : base(pos, tex, rec)
         {
@@ -58,20 +65,26 @@ namespace Pacman
                 case ENEMYTYPE.RED:
                     this.speed = 49f;
                     spawnPoint = EntityManager.enemySpawnLocations[0];
+                    isUsingAStarPathfinding = true;
                     break;
                 case ENEMYTYPE.PINK:
                     this.speed = 48f;
                     spawnPoint = EntityManager.enemySpawnLocations[1];
+                    isUsingAStarPathfinding = false;
+                    isUsingBouncingMovement = true;
                     break;
                 case ENEMYTYPE.CYAN:
                     this.speed = 50f;
                     spawnPoint = EntityManager.enemySpawnLocations[2];
+                    isUsingAStarPathfinding = true;
                     break;
                 case ENEMYTYPE.ORANGE:
                     this.speed = 47f;
                     spawnPoint = EntityManager.enemySpawnLocations[3];
+                    isUsingAStarPathfinding = false;
                     break;
             }
+            random = new Random();
 
         }
 
@@ -456,11 +469,90 @@ namespace Pacman
             hitbox.Y = (int)pos.Y;
             hitbox.Width = Game1.tileSize;
             hitbox.Height = Game1.tileSize;
-            PathFidningMovement(gameTime);
+            if (isUsingAStarPathfinding)
+            {
+                PathFidningMovement(gameTime);
+            }
+            else
+            {
+                pos += direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (!moving)
+                { 
+                    if(isUsingBouncingMovement)
+                    {
+                        if (direction.X == 0 && direction.Y == 0)
+                        {
+                            direction = new Vector2(0, 1);
+                        }
+                        if (GamemodeManager.GetTileAtPosition(pos + direction * Game1.tileSize / 2))
+                        {
+                            destination = pos + direction * Game1.tileSize / 2;
+                            moving = true;
+                        }
+                        else
+                        {
+                            randomDirection = random.Next(0, 100);
+                            if (randomDirection >= 75)
+                            {
+                                ChangeDirection(new Vector2(-1, 0));
+                            }
+                            else if (randomDirection >= 50 && randomDirection < 75)
+                            {
+                                ChangeDirection(new Vector2(1, 0));
+                            }
+                            else if (randomDirection >= 25 && randomDirection < 50)
+                            {
+                                ChangeDirection(new Vector2(0, -1));
+                            }
+                            else if (randomDirection < 25)
+                            {
+                                ChangeDirection(new Vector2(0, 1));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        randomDirection = random.Next(0, 100);
+                        if (randomDirection >= 75)
+                        {
+                            ChangeDirection(new Vector2(-1, 0));
+                        }
+                        else if (randomDirection >= 50 && randomDirection < 75)
+                        {
+
+                            ChangeDirection(new Vector2(1, 0));
+                        }
+                        else if (randomDirection >= 25 && randomDirection < 50)
+                        {
+                            ChangeDirection(new Vector2(0, -1));
+                        }
+                        else if (randomDirection < 25)
+                        {
+                            ChangeDirection(new Vector2(0, 1));
+                        }
+                    }
+                    
+                }
+                if (Vector2.Distance(pos, destination) < 1)
+                {
+                    pos = destination;
+                    moving = false;
+                }
+            }
+            
             Animate(gameTime);
         }
 
-
+        public void ChangeDirection(Vector2 dir)
+        {
+            direction = dir;
+            Vector2 newDestination = pos + direction * Game1.tileSize / 2;
+            if (GamemodeManager.GetTileAtPosition(newDestination))
+            {
+                destination = newDestination;
+                moving = true;
+            }
+        }
 
 
 

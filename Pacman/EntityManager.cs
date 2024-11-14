@@ -116,7 +116,11 @@ namespace Pacman
                         enemy.CancelMovement();
                     }
                 }
-                enemy.CalculatePath(player.pos);
+                if (enemy.isUsingAStarPathfinding)
+                {
+                    enemy.CalculatePath(player.pos);
+                }
+                
             }
         }
 
@@ -203,7 +207,6 @@ namespace Pacman
                 Game1.gameState = Game1.GAMESTATE.LOST;
                 player.health = 3;
             }
-
         }
         
 
