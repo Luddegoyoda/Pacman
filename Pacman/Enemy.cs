@@ -14,7 +14,7 @@ namespace Pacman
         bool enRouteToDestitation;
         bool pathFound;
         public bool isRespawning;
-        public bool isSacred;
+        public bool isScared;
         public bool isUsingAStarPathfinding;
         public bool isUsingBouncingMovement = false;
         public bool moving = false;

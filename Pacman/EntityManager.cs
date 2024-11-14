@@ -188,8 +188,10 @@ namespace Pacman
                 {
                     if (player.isEmpowered)
                     {
+                        if (!enemy.isRespawning)
+                            GamemodeManager.score += 500;
                         enemy.RespawnPhase();
-                        GamemodeManager.score += 500;
+                        
                     }
                     else
                     {

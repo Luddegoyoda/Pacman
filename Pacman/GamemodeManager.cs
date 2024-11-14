@@ -27,6 +27,7 @@ namespace Pacman
         bool menuCreated;
         bool savedScore = false;
         Button startButton;
+        
 
         public static List<Vector2> teleporters = new List<Vector2>();
 
@@ -34,6 +35,8 @@ namespace Pacman
         {
             // Initialize the button with a texture and position.
             startButton = new Button(TextureManager.startButtonTex, new Vector2(500-TextureManager.startButtonTex.Width/2, 500 - TextureManager.startButtonTex.Height/2));
+            
+
             mapsCompleted = 0;
         }
 
@@ -244,6 +247,9 @@ namespace Pacman
                 case Game1.GAMESTATE.MENU:
                     spriteBatch.Draw(TextureManager.menuTex, new Rectangle(0, 0, 960, 1000), Color.White);
                     startButton.Draw(spriteBatch);
+
+                    spriteBatch.DrawString(TextureManager.font, "Press [Q] to play  level 1", new Vector2(300, 580), Color.White);
+                    spriteBatch.DrawString(TextureManager.font, "Press [E] to play  level 2", new Vector2(550, 580), Color.White);
                     break;
 
                 case Game1.GAMESTATE.PLAYING:
