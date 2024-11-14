@@ -22,16 +22,24 @@ namespace Pacman
 
         public bool isPressed()
         {
+            bool pressed = false;
             currentMouseState = Mouse.GetState();
 
             if (buttonRectangle.Contains(currentMouseState.Position))
             {
                 buttonColor = Color.Gray; // Highlight on hover
 
-                if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
+                if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && pressed == false)
                 {
                     previousMouseState = currentMouseState;
+                    pressed = true;
                     return true;
+                }
+                else if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && pressed == true)
+                {
+                    previousMouseState = currentMouseState;
+                    pressed = false;
+                    return false;
                 }
             }
             else
